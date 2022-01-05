@@ -55,9 +55,9 @@ const articles = ref([...mock, ...mock, ...mock])
   max-width 1280px
   padding 100px 20px 0px
   .articles
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
+    display flex
+    flex-wrap wrap
+    flex-direction row
+    justify-content space-between
+    align-items flex-start
 </style>

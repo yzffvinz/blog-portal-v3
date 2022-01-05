@@ -1,0 +1,21 @@
+{
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "vetur.format.enable": true,
+    "vetur.format.options.tabSize": 4,
+    "vetur.format.defaultFormatter.js": "none",
+    "vetur.format.defaultFormatter.html": "none",
+    "vetur.format.defaultFormatter.ts": "none",    
+    "vetur.format.defaultFormatter.stylus": "stylus-supremacy",
+    "vetur.validation.template": false,
+    "vetur.underline.refValue": false,
+    "vetur.validation.interpolation": false,
+    "vetur.validation.script": false,
+
+    "stylusSupremacy.insertColons": false, // 是否插入冒号
+    "stylusSupremacy.insertSemicolons": false, // 是否插入分号
+    "stylusSupremacy.insertBraces": false, // 是否插入大括号
+    "stylusSupremacy.insertNewLineAroundImports": false, // import之后是否换行
+    "stylusSupremacy.insertNewLineAroundBlocks": false, // 两个选择器中是否换行
+}
