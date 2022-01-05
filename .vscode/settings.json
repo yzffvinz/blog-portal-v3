@@ -1,9 +1,10 @@
 {
+    "editor.tabSize": 2,
     "[vue]": {
         "editor.defaultFormatter": "octref.vetur"
     },
     "vetur.format.enable": true,
-    "vetur.format.options.tabSize": 4,
+    "vetur.format.options.tabSize": 2,
     "vetur.format.defaultFormatter.js": "none",
     "vetur.format.defaultFormatter.html": "none",
     "vetur.format.defaultFormatter.ts": "none",    

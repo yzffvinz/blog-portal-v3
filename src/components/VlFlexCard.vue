@@ -35,6 +35,9 @@ defineProps<{
 .article__image
   width 100%
   display block
+  @media (max-width 600px)
+    margin-left -20px
+    width 100vw
 .article__content
   margin-top 18px
   @media (max-width 600px)

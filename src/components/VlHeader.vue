@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 defineProps<{ title: string }>()
-const test = ref(0)
 </script>
 
 <template>
@@ -30,5 +27,5 @@ header
     align-items center
     justify-content center
     height 70px
-    font-size 28px
+    font-size 32px
 </style>
