@@ -2,7 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import { ref } from 'vue'
-import router from '@/router.ts'
+import { useRouter } from 'vue-router'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
 const mock = [
@@ -33,8 +33,10 @@ const mock = [
 ]
 
 const articles = ref([...mock, ...mock, ...mock])
-function onCardClick(e) {
-  router.push({ name: '/detail', params: { index: e } })
+const router = useRouter()
+
+function onCardClick(index: number) {
+  router.push({ path: '/detail', params: { index } })
 }
 </script>
 

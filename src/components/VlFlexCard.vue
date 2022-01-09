@@ -16,7 +16,7 @@ defineProps<{
       </div>
     </div>
     <div class="article__content">
-      <div class="article__title">
+      <div class="article__title_s">
         {{ articleDetail.title }}
       </div>
       <div class="article__date">{{ articleDetail.date }}</div>
@@ -42,7 +42,7 @@ defineProps<{
   margin-top 18px
   @media (max-width 600px)
     padding 0 20px
-.article__title
+.article__title_s
   font-size 20px
   font-weight 400
   line-height 32px

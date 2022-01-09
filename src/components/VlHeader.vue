@@ -1,11 +1,33 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
+
+const hidden = ref(false)
+
+onMounted(() => {
+  window.addEventListener(
+    'scroll',
+    (e) => {
+      const scrollTop =
+        e.target.documentElement.scrollTop || e.target.body.scrollTop
+      hidden.value = scrollTop > 100
+    },
+    true
+  )
+})
+
+function scrollToTop() {
+  window.scrollTo(0, 30)
+}
+
 defineProps<{ title: string }>()
 </script>
 
 <template>
   <header>
-    <div class="header-title">
-      {{ title.toUpperCase() }}
+    <div class="header-title" @click.stop="scrollToTop">
+      <span v-if="!hidden">
+        {{ title.toUpperCase() }}
+      </span>
     </div>
   </header>
 </template>
@@ -26,6 +48,8 @@ header
     display flex
     align-items center
     justify-content center
-    height 70px
+    height 50px
     font-size 32px
+    @media (min-width: 600px)
+      height 70px
 </style>

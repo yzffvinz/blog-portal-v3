@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import './style/reset.styl'
+import 'normalize-css'
+// import './style/reset.styl'
+import './style/theme.styl'
 </script>
 
 <template>
