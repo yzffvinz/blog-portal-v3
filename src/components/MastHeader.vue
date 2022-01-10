@@ -1,18 +1,16 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { throttle } from '@/common/utils.ts'
 
 const hidden = ref(false)
+const onScorll = throttle((e) => {
+  const scrollTop =
+    e.target.documentElement.scrollTop || e.target.body.scrollTop
+  hidden.value = scrollTop > 100
+})
 
 onMounted(() => {
-  window.addEventListener(
-    'scroll',
-    (e) => {
-      const scrollTop =
-        e.target.documentElement.scrollTop || e.target.body.scrollTop
-      hidden.value = scrollTop > 100
-    },
-    true
-  )
+  window.addEventListener('scroll', onScorll, true)
 })
 
 function scrollToTop() {
@@ -23,13 +21,15 @@ defineProps<{ title: string }>()
 </script>
 
 <template>
-  <header>
-    <div class="header-title" @click.stop="scrollToTop">
-      <span v-if="!hidden">
-        {{ title.toUpperCase() }}
-      </span>
-    </div>
-  </header>
+  <div class="masthead-container">
+    <header>
+      <div class="header-title" @click.stop="scrollToTop">
+        <span v-if="!hidden">
+          {{ title.toUpperCase() }}
+        </span>
+      </div>
+    </header>
+  </div>
 </template>
 
 <style lang="stylus" scoped>
@@ -50,6 +50,6 @@ header
     justify-content center
     height 50px
     font-size 32px
-    @media (min-width: 600px)
+    @media (min-width 600px)
       height 70px
 </style>

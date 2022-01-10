@@ -2,11 +2,11 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import '@/style/reset.styl'
-import VlHeader from '@components/VlHeader.vue'
+import MastHeader from '@components/MastHeader.vue'
 </script>
 
 <template>
-  <VlHeader title="Vincent Home" />
+  <MastHeader title="Vincent Home" />
   <router-view></router-view>
 </template>
 
@@ -15,7 +15,7 @@ import VlHeader from '@components/VlHeader.vue'
   margin 0 auto
   display relative
   max-width 1280px
-  padding 100px 20px 0px
+  padding 0 20px
   .articles
     display flex
     flex-wrap wrap

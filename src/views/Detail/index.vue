@@ -154,12 +154,12 @@ const content = ref(`一
           {{ content }}
         </div>
       </div>
-      <div class="article__column--aside">1</div>
+      <!-- <div class="article__column--aside">1</div> -->
     </div>
   </article>
 </template>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .article__title
   padding-bottom 60px
 </style>
