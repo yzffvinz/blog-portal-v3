@@ -31,12 +31,25 @@ const mock = [
     date: '17 December 2021',
   },
 ]
+const articles = ref([])
 
-const articles = ref([...mock, ...mock, ...mock])
+fetch('/api/article/list')
+  .then((res) => res.json())
+  .then((data) => {
+    articles.value = data.files.map((file: { name: string; path: string }) => {
+      return {
+        title: file.name,
+        path: file.path,
+      }
+    })
+  })
+
 const router = useRouter()
 
-function onCardClick(index: number) {
-  router.push({ path: '/detail', params: { index } })
+function onCardClick({ path, title }: { path: string; title: string }) {
+  router.push({
+    path: `/detail/${encodeURIComponent(title)}/${encodeURIComponent(path)}`,
+  })
 }
 </script>
 
@@ -46,7 +59,7 @@ function onCardClick(index: number) {
       v-for="(article, index) in articles"
       :key="'article_' + index"
       :article-detail="article"
-      @click.stop="onCardClick(index)"
+      @click.stop="onCardClick(article)"
     />
   </div>
 </template>

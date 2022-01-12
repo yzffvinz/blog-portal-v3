@@ -1,9 +1,10 @@
 <script setup lang="ts">
 defineProps<{
   articleDetail: {
-    img: string
+    img?: string
     title: string
-    date: string
+    date?: string
+    path: string
   }
 }>()
 </script>

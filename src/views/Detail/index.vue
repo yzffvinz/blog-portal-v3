@@ -1,142 +1,23 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+// import MdEditor from 'md-editor-v3'
+// import 'md-editor-v3/lib/style.css'
+import { marked } from 'marked'
+import 'github-markdown-css/github-markdown-light.css'
+import { useRoute } from 'vue-router'
 
-const content = ref(`一
- 
-我是一个悲伤的水壶
-遗失汤匙和群杯
-水锈坚硬地结在下颌
-为你保留的半壶咖啡
-正在变凉
- 
-我是一个悲伤的水壶
-放在厨台的一角
-无法挪动自身
-给你需要的啤酒和药片
-尽力反光
- 
-我是一个悲伤的水壶
-在诸多器皿中
-谨慎地保持安静
-挺胸抬头
-等着清晨的一次使用
- 
-我是一个悲伤的水壶
-只有把手、壶盖和一圈铁皮
-以及腹中的空气
-全部给你了
-包括残余的水
- 
- 
-二
- 
-谁偷走了我的水
-刚刚沸腾的水
-有我所有的热情和期盼
-我感觉到倾斜
-继而是轻盈
-只留下湿润的壶底
-我是水壶，遗失了
-刚烧开的热水
- 
- 
-三
- 
-你把我从孤独的海洋里打捞出来
-赋予我形状，颜色和勇气
-教会我关于陆地的知识
-如何在干燥的空气里获得水
-如何呼吸，如何站立
- 
-下雨的夜里我忧心忡忡
-我忘记海洋，忘记那些沉默和黑暗
-桌上的百合花明亮如灯
-你将在哪一秒敲开房门
-轻声诉说一天的琐事？
- 
-我们偶有争执
-关于岛屿的记忆，关于那次出海
-你说风帆打开之后，一切就不受控制
-我说这是洋流是隐而不显的力量
-海洋广阔，却不是归宿
- 
- 
-四 恐龙
- 
-地下一层的空间
-被惨白的巨大骨骼占据
-脊椎一节又一节缀连
-很快便超出视距
-想象恐龙需要更久远的记忆
-给予蓝色的肌肉棕色的鳞甲
-以及湿润的泥土上巨大的脚印
-眼神接触如灌溉水井
-豺狼虎豹皆失于一尾之下
-迟缓如封闭的石像
-略带硫磺的空气摇摆着厥叶
-尔后像寄信寄出自己
-冰川和泥土便是信封
- 
- 
-五 鸡蛋
- 
-十克的重量从
-一只托在掌心的淡白鸡蛋伊始
-隐秘的气孔
-壳保持着脆弱的坚硬
-闭上左眼或右眼
-鸡蛋都有圆滑的弧线
-敲碎后，一层薄如蝉翼的白膜
-勉力兜住欲泣的蛋液
-清处与黄处，靠一条系带联结
-破碎成蛛网的壳
-丢在花盆里
- 
- 
-六 寓言
- 
-我读过一个动物口吐人言的寓言
-狐狸梳理火红的毛
-蟋蟀骑在乌鸦的背上
-苍蝇面对镜头说话
-后来那本书，给了表弟
-又被数学老师没收
-表弟被问起时可惜的表情
-寓言中的动物们
-都已早早走散，并一致约定
-对人世保持沉默
-七 清明
-死亡是彻底的，沉默
-日记，一句话，模糊的信纸
-记忆中远去的回声
-这么多，清明
-心中的石头散了形体
-终归，余下不平的地方
-上香的路，要自己走
-拨灰的木棍，用过一次
-就不要再带回来了
-死亡的意义难以在刹那出现
-要在新的日子里
-别人的日子里
-陆续绽放
-河水源头的一次变动
-影响了河的中段、下段
-以及，最终的入海
-死亡的回声就是这样
-只要余下的人还活着
-就不会消失
-八 躺在云上
-有时，想躺在云上
-舒散四肢，放空
-阳光，无遮拦地照着
-所有的骨节都被承托
-没有一丝风，我闭上眼睛
-缓慢地，呼吸
-像沉浸在壶水中
-壶底，开着蓝的玫瑰
-沸腾的琐碎气泡
-拍打后背，声音
-封于壶盖之外`)
+const title = ref('')
+const content = ref('')
+
+const { params } = useRoute()
+
+const props = ref(params)
+
+fetch(`/api/article/detail?articlePath=${params.path}`)
+  .then((response) => response.json())
+  .then((data) => {
+    content.value = marked(data.detail)
+  })
 </script>
 
 <template>
@@ -144,14 +25,15 @@ const content = ref(`一
     <!-- header -->
     <header>
       <div class="article__header">
-        <h1>器皿组诗及其它</h1>
+        <h1>{{ props.title }}</h1>
       </div>
     </header>
     <!-- contents -->
     <div class="article__columns">
       <div class="article__column--main">
         <div class="article__body">
-          {{ content }}
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <article class="markdown-body" v-html="content"></article>
         </div>
       </div>
       <!-- <div class="article__column--aside">1</div> -->
