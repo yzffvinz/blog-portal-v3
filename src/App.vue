@@ -1,8 +1,4 @@
-<script setup lang="ts">
-import 'normalize-css'
-// import './style/reset.styl'
-import './style/theme.styl'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <router-view></router-view>

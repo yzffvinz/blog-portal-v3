@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { throttle } from '@/common/utils.ts'
+import { throttle } from '@/common/utils'
 
 const hidden = ref(false)
-const onScorll = throttle((e) => {
+const onScorll = throttle((e: any) => {
   const scrollTop =
     e.target.documentElement.scrollTop || e.target.body.scrollTop
   hidden.value = scrollTop > 100

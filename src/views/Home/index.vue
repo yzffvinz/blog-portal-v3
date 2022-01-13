@@ -40,6 +40,10 @@ fetch('/api/article/list')
       return {
         title: file.name,
         path: file.path,
+        img:
+          Math.random() > 0.5
+            ? mock[Math.floor(Math.random() * mock.length)].img
+            : '',
       }
     })
   })
