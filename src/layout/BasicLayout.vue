@@ -1,12 +1,9 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import '@/style/reset.styl'
 import MastHeader from '@components/MastHeader.vue'
 </script>
 
 <template>
-  <MastHeader title="Vincent Home" />
+  <MastHeader title="Gray" />
   <router-view></router-view>
 </template>
 

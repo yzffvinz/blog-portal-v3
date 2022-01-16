@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-// import MdEditor from 'md-editor-v3'
-// import 'md-editor-v3/lib/style.css'
 import { marked } from 'marked'
 import 'github-markdown-css/github-markdown-light.css'
 import { useRoute } from 'vue-router'
@@ -10,10 +8,9 @@ const title = ref('')
 const content = ref('')
 
 const { params } = useRoute()
-
 const props = ref(params)
 
-fetch(`/api/article/detail?articlePath=${params.path}`)
+fetch(`/api/article/detail?articleId=${params.articleId}`)
   .then((response) => response.json())
   .then((data) => {
     content.value = marked(data.detail)

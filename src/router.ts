@@ -19,7 +19,7 @@ const router = createRouter({
           },
         },
         {
-          path: '/detail/:title/:path',
+          path: '/detail/:title/:articleId',
           component: Detail,
           meta: {
             title: '详情',

@@ -1,18 +1,4 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { throttle } from '@/common/utils'
-
-const hidden = ref(false)
-const onScorll = throttle((e: any) => {
-  const scrollTop =
-    e.target.documentElement.scrollTop || e.target.body.scrollTop
-  hidden.value = scrollTop > 100
-})
-
-onMounted(() => {
-  window.addEventListener('scroll', onScorll, true)
-})
-
 function scrollToTop() {
   window.scrollTo(0, 30)
 }
@@ -24,7 +10,7 @@ defineProps<{ title: string }>()
   <div class="masthead-container">
     <header>
       <div class="header-title" @click.stop="scrollToTop">
-        <span v-if="!hidden">
+        <span>
           {{ title.toUpperCase() }}
         </span>
       </div>
