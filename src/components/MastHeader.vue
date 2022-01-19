@@ -1,6 +1,12 @@
 <script setup lang="ts">
-function scrollToTop() {
-  window.scrollTo(0, 30)
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function toHome() {
+  router.push({
+    path: '/',
+  })
 }
 
 defineProps<{ title: string }>()
@@ -9,7 +15,7 @@ defineProps<{ title: string }>()
 <template>
   <div class="masthead-container">
     <header>
-      <div class="header-title" @click.stop="scrollToTop">
+      <div class="header-title" @click.stop="toHome">
         <span>
           {{ title.toUpperCase() }}
         </span>

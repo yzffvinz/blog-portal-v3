@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { marked } from 'marked'
 import 'github-markdown-css/github-markdown-light.css'
+import fetchApi from '@/libs/fetchApi'
 import { useRoute } from 'vue-router'
 
 const title = ref('')
@@ -10,8 +11,8 @@ const content = ref('')
 const { params } = useRoute()
 const props = ref(params)
 
-fetch(`/api/article/detail?articleId=${params.articleId}`)
-  .then((response) => response.json())
+fetchApi
+  .get(`/api/article/detail`, { articleId: params.articleId })
   .then((data) => {
     content.value = marked(data.detail)
   })

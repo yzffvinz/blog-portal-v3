@@ -13,21 +13,27 @@ defineProps<{
   <div class="article article--vertical">
     <div class="article__image-container">
       <div class="article__image-wrap">
-        <img class="article__image" :src="articleDetail.img" />
+        <img
+          v-if="articleDetail.img"
+          class="article__image"
+          :src="articleDetail.img"
+        />
       </div>
     </div>
     <div class="article__content">
       <div class="article__title_s">
         {{ articleDetail.title }}
       </div>
-      <div class="article__date">{{ articleDetail.date }}</div>
+      <div v-if="articleDetail.date" class="article__date">
+        {{ articleDetail.date }}
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="stylus" scoped>
 .article
-  margin-bottom 50px
+  // margin-bottom 50px
   flex 0 1 100%
   @media (min-width 600px)
     flex 0 1 47.9838709677%
