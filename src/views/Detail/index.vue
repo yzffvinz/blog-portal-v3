@@ -1,20 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { marked } from 'marked'
 import 'github-markdown-css/github-markdown-light.css'
 import fetchApi from '@/libs/fetchApi'
 import { useRoute } from 'vue-router'
 
-const title = ref('')
-const content = ref('')
-
 const { params } = useRoute()
-const props = ref(params)
+
+const infos = ref({
+  category: '',
+  type: '',
+  tag: '',
+  name: '',
+})
+const content = ref('')
 
 fetchApi
   .get(`/api/article/detail`, { articleId: params.articleId })
   .then((data) => {
-    content.value = marked(data.detail)
+    content.value = marked(data.content)
+    infos.value = Object.assign(data, { content: '' })
   })
 </script>
 
@@ -22,8 +27,11 @@ fetchApi
   <article>
     <!-- header -->
     <header>
-      <div class="article__header">
-        <h1>{{ props.title }}</h1>
+      <div class="post__title">
+        {{ infos.type }} {{ infos.tag }}
+        <h1>
+          {{ infos.name }}
+        </h1>
       </div>
     </header>
     <!-- contents -->
@@ -40,6 +48,20 @@ fetchApi
 </template>
 
 <style lang="stylus" scoped>
-.article__title
-  padding-bottom 60px
+.post__title
+  margin 0 auto
+  max-width 750px
+  text-align center
+  line-height 1.3
+  word-wrap break-word
+  font-size 26px
+  @media (min-width 600px)
+    font-size 38px
+  @media (min-width 1000px)
+    font-size 50px
+.markdown-body :deep()
+  img
+    position relative
+    left 50%
+    transform translateX(-50%)
 </style>

@@ -20,15 +20,9 @@ fetchApi.get('/api/article/list').then((data) => {
 
 const router = useRouter()
 
-function onCardClick({
-  articleId,
-  title,
-}: {
-  articleId: string
-  title: string
-}) {
+function onCardClick(articleId: string) {
   router.push({
-    path: `/detail/${title}/${articleId}`,
+    path: `/detail/${articleId}`,
   })
 }
 </script>
@@ -39,7 +33,7 @@ function onCardClick({
       v-for="(article, index) in articles"
       :key="'article_' + index"
       :article-detail="article"
-      @click.stop="onCardClick(article)"
+      @click.stop="onCardClick(article.articleId)"
     />
   </div>
 </template>
