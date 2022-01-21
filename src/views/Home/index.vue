@@ -4,7 +4,13 @@ import { useRouter } from 'vue-router'
 import fetchApi from '@/libs/fetchApi'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
-const articles = ref([])
+const articles = ref([
+  {
+    title: '',
+    path: '',
+    articleId: '',
+  },
+])
 
 fetchApi.get('/api/article/list').then((data) => {
   articles.value = data.files.map(
