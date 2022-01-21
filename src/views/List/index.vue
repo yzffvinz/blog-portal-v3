@@ -4,7 +4,13 @@ import { useRouter, useRoute } from 'vue-router'
 import fetchApi from '@/libs/fetchApi'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
-const articles = ref([])
+const articles = ref([
+  {
+    title: '',
+    articleId: '',
+    path: '',
+  },
+])
 
 const { params } = useRoute()
 
