@@ -4,7 +4,9 @@ import MastHeader from '@components/MastHeader.vue'
 
 <template>
   <MastHeader title="Gray" />
-  <router-view></router-view>
+  <div class="container">
+    <router-view :key="$route.fullPath"></router-view>
+  </div>
 </template>
 
 <style lang="stylus">
@@ -12,11 +14,10 @@ import MastHeader from '@components/MastHeader.vue'
   margin 0 auto
   display relative
   max-width 1280px
-  padding 0 20px
-  .articles
-    display flex
-    flex-wrap wrap
-    flex-direction row
-    justify-content space-between
-    align-items flex-start
+.container
+  padding-top 50px
+  @media (min-width: 600px)
+    padding-top 90px
+  @media (min-width: 1000px)
+    padding-top 120px
 </style>

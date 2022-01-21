@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import fetchApi from '@/libs/fetchApi'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
 const articles = ref([])
 
-fetchApi.get('/api/article/list').then((data) => {
-  articles.value = data.files.map(
-    (file: { name: string; articleId: string }) => {
-      return {
-        title: file.name,
-        articleId: file.articleId,
-        img: '',
+const { params } = useRoute()
+
+fetchApi
+  .get('/api/article/list', {
+    ...params,
+  })
+  .then((data) => {
+    articles.value = data.files.map(
+      (file: { name: string; articleId: string }) => {
+        return {
+          title: file.name,
+          articleId: file.articleId,
+          img: '',
+        }
       }
-    }
-  )
-})
+    )
+  })
 
 const router = useRouter()
 

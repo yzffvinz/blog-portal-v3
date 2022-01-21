@@ -24,7 +24,7 @@ fetchApi
 </script>
 
 <template>
-  <article>
+  <article class="post__container">
     <!-- header -->
     <header>
       <div class="post__title">
@@ -48,6 +48,10 @@ fetchApi
 </template>
 
 <style lang="stylus" scoped>
+.post__container
+  max-width 1280px
+  margin 0 auto
+  padding 0 20px
 .post__title
   margin 0 auto
   max-width 750px
@@ -59,9 +63,4 @@ fetchApi
     font-size 38px
   @media (min-width 1000px)
     font-size 50px
-.markdown-body :deep()
-  img
-    position relative
-    left 50%
-    transform translateX(-50%)
 </style>
