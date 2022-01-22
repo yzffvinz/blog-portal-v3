@@ -58,4 +58,9 @@ function onCardClick(articleId: string) {
   flex-direction row
   justify-content space-between
   align-items flex-start
+  padding-top 50px
+  @media (min-width 600px)
+    padding-top 90px
+  @media (min-width 1000px)
+    padding-top 120px
 </style>

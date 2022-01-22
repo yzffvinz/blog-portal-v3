@@ -154,9 +154,37 @@ defineProps<{ title: string }>()
       padding 80px 20px 64px
       @media (min-width 600px)
         padding 110px 20px 64px
-    .nav__section-title-link
-      color #a1a1a3
-
+      .nav__sections
+        display flex
+        flex-wrap wrap
+        .nav__section
+          padding-bottom 32px
+          order 0
+          flex-basis 100%
+          @media (min-width 600px)
+            padding-bottom 48px
+            color #a1a1a3
+            flex-basis 50%
+          @media (min-width 800px)
+            flex-basis 25%
+          .nav__section-title
+            .nav__section-title-link
+              color #a1a1a3
+              font-size 18px
+              line-height 27px
+              @media (min-width 600px)
+                font-size 22px
+                line-height 33px
+          .nav__subnav-item
+            padding-right 10px
+            @media (min-width 600px)
+              padding-right 0
+            .nav__subnav-link
+              color #fff
+              font-size 18px
+              line-height 1.6
+              @media (min-width 600px)
+                font-size 22px
 .nav-visible
   .masthead
     background #222223

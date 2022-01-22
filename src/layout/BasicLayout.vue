@@ -14,10 +14,4 @@ import MastHeader from '@components/MastHeader.vue'
   margin 0 auto
   display relative
   max-width 1280px
-.container
-  padding-top 50px
-  @media (min-width: 600px)
-    padding-top 90px
-  @media (min-width: 1000px)
-    padding-top 120px
 </style>
