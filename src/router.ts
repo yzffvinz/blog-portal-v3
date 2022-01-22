@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import BasicLayout from '@/layout/BasicLayout.vue'
-import Home from '@/views/Home/index.vue'
 import List from '@/views/List/index.vue'
 import Detail from '@/views/Detail/index.vue'
 
@@ -14,9 +13,16 @@ const router = createRouter({
       children: [
         {
           path: '',
-          component: Home,
+          component: List,
           meta: {
             title: '首页',
+          },
+        },
+        {
+          path: '/list/:category',
+          component: List,
+          meta: {
+            title: '列表',
           },
         },
         {
