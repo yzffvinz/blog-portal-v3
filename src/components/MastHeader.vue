@@ -89,6 +89,8 @@ defineProps<{ title: string }>()
 </template>
 
 <style lang="stylus" scoped>
+ul, ol, li
+  list-style none
 .masthead-container
   position fixed
   width 100vw
