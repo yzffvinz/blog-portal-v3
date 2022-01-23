@@ -3,7 +3,7 @@ import MastHeader from '@components/MastHeader.vue'
 </script>
 
 <template>
-  <MastHeader title="Gray" />
+  <MastHeader title="Booming" />
   <div class="container">
     <router-view :key="$route.fullPath"></router-view>
   </div>

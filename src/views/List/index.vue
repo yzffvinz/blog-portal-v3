@@ -4,6 +4,12 @@ import { useRouter, useRoute } from 'vue-router'
 import fetchApi from '@/libs/fetchApi'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
+const intro = ref({
+  description: '',
+  name: '',
+  path: '',
+})
+
 const articles = ref([
   {
     title: '',
@@ -19,6 +25,7 @@ fetchApi
     ...params,
   })
   .then((data) => {
+    intro.value = data.intro
     articles.value = data.files.map(
       (file: { name: string; articleId: string }) => {
         return {
@@ -40,27 +47,49 @@ function onCardClick(articleId: string) {
 </script>
 
 <template>
-  <div class="articles">
-    <VlFlexCard
-      v-for="(article, index) in articles"
-      :key="'article_' + index"
-      :article-detail="article"
-      @click.stop="onCardClick(article.articleId)"
-    />
+  <div class="listing">
+    <div v-if="intro.name" class="listing__tilte">{{ intro.name }}</div>
+    <div v-if="intro.description" class="listing__intro">
+      <p>{{ intro.description }}</p>
+    </div>
+    <div class="articles">
+      <VlFlexCard
+        v-for="(article, index) in articles"
+        :key="'article_' + index"
+        :article-detail="article"
+        @click.stop="onCardClick(article.articleId)"
+      />
+    </div>
   </div>
 </template>
 
 <style lang="stylus">
-.articles
+.listing
   padding 0 20px
-  display flex
-  flex-wrap wrap
-  flex-direction row
-  justify-content space-between
-  align-items flex-start
-  padding-top 50px
+  padding-top 80px
   @media (min-width 600px)
-    padding-top 90px
-  @media (min-width 1000px)
-    padding-top 120px
+    padding-top 130px
+  .listing__tilte
+    max-width 750px
+    text-align center
+    margin 0 auto 40px
+    font-size 30px
+    line-height 38px
+    @media (min-width 600px)
+      margin-bottom 60px
+      font-size 38px
+      line-height 52px
+  .listing__intro
+    max-width 600px
+    margin -10px auto 40px
+    text-align center
+    @media (min-width 600px)
+      margin-top -30px
+      margin-bottom 60px
+  .articles
+    display flex
+    flex-wrap wrap
+    flex-direction row
+    justify-content space-between
+    align-items flex-start
 </style>
