@@ -46,7 +46,7 @@ defineProps<{ title: string }>()
       <div class="masthead__content">
         <div class="masthead__logo-container" @click.stop="toHome">
           <span class="masthead__logo">
-            {{ title.toUpperCase() }}
+            {{ title }}
           </span>
         </div>
       </div>

@@ -3,7 +3,7 @@ import MastHeader from '@components/MastHeader.vue'
 </script>
 
 <template>
-  <MastHeader title="Booming" />
+  <MastHeader title="B👀 Ming✨" />
   <div class="container">
     <router-view :key="$route.fullPath"></router-view>
   </div>
@@ -14,4 +14,5 @@ import MastHeader from '@components/MastHeader.vue'
   margin 0 auto
   display relative
   max-width 1280px
+  padding-bottom 60px
 </style>
