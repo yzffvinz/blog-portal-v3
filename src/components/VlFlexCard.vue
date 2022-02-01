@@ -1,10 +1,16 @@
 <script setup lang="ts">
 defineProps<{
-  articleDetail: {
-    img?: string
+  blogDetail: {
+    _id: string
     title: string
-    date?: string
-    path: string
+    cover: string
+    description: string
+    author: string
+    category: string
+    tags: string[]
+    createtime: number
+    updatetime: number
+    content: string
   }
 }>()
 </script>
@@ -14,18 +20,18 @@ defineProps<{
     <div class="article__image-container">
       <div class="article__image-wrap">
         <img
-          v-if="articleDetail.img"
+          v-if="blogDetail.cover"
           class="article__image"
-          :src="articleDetail.img"
+          :src="blogDetail.cover"
         />
       </div>
     </div>
     <div class="article__content">
       <div class="article__title_s">
-        {{ articleDetail.title }}
+        {{ blogDetail.title }}
       </div>
-      <div v-if="articleDetail.date" class="article__date">
-        {{ articleDetail.date }}
+      <div v-if="blogDetail.createtime" class="article__date">
+        {{ blogDetail.createtime }}
       </div>
     </div>
   </div>

@@ -26,14 +26,14 @@ const router = createRouter({
           },
         },
         {
-          path: '/list/:category/:type',
+          path: '/list/:category/:tag',
           component: List,
           meta: {
             title: '列表',
           },
         },
         {
-          path: '/detail/:articleId',
+          path: '/detail/:id',
           component: Detail,
           meta: {
             title: '详情',

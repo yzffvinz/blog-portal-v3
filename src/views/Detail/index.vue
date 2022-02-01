@@ -7,20 +7,26 @@ import { useRoute } from 'vue-router'
 
 const { params } = useRoute()
 
-const infos = ref({
+const blogDetail = ref({
+  _id: '',
+  title: '',
+  cover: '',
+  description: '',
+  author: '',
   category: '',
-  type: '',
-  tag: '',
-  name: '',
+  tags: [],
+  createtime: 0,
+  updatetime: 0,
+  content: '',
 })
-const content = ref('')
 
-fetchApi
-  .get(`/api/article/detail`, { articleId: params.articleId })
-  .then((data) => {
-    content.value = marked(data.content)
-    infos.value = Object.assign(data, { content: '' })
+fetchApi.get(`/api/blog/detail`, { _id: params.id }).then(({ blog }) => {
+  // marked 一下
+  Object.assign(blog, {
+    content: marked(blog.content),
   })
+  blogDetail.value = blog
+})
 </script>
 
 <template>
@@ -30,7 +36,7 @@ fetchApi
       <div class="post__title">
         <!-- {{ infos.type }} {{ infos.tag }} -->
         <h1>
-          {{ infos.name }}
+          {{ blogDetail.title }}
         </h1>
       </div>
     </header>
@@ -39,7 +45,7 @@ fetchApi
       <div class="article__column--main">
         <div class="article__body">
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <article class="markdown-body" v-html="content"></article>
+          <article class="markdown-body" v-html="blogDetail.content"></article>
         </div>
       </div>
       <!-- <div class="article__column--aside">1</div> -->

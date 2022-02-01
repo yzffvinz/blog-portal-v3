@@ -5,36 +5,35 @@ import fetchApi from '@/libs/fetchApi'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
 const intro = ref({
-  description: '',
   name: '',
-  path: '',
+  displayName: '',
+  description: '',
 })
 
-const articles = ref([
+const blogs = ref([
   {
+    _id: '',
     title: '',
-    articleId: '',
-    path: '',
+    cover: '',
+    description: '',
+    author: '',
+    category: '',
+    tags: [],
+    createtime: 0,
+    updatetime: 0,
+    content: '',
   },
 ])
 
 const { params } = useRoute()
 
 fetchApi
-  .get('/api/article/list', {
+  .get('/api/blog/list', {
     ...params,
   })
-  .then((data) => {
-    intro.value = data.intro
-    articles.value = data.files.map(
-      (file: { name: string; articleId: string }) => {
-        return {
-          title: file.name,
-          articleId: file.articleId,
-          img: '',
-        }
-      }
-    )
+  .then(({ tag, blogs: list }) => {
+    intro.value = tag
+    blogs.value = list
   })
 
 const router = useRouter()
@@ -48,16 +47,16 @@ function onCardClick(articleId: string) {
 
 <template>
   <div class="listing">
-    <div v-if="intro.name" class="listing__tilte">{{ intro.name }}</div>
+    <div v-if="intro.name" class="listing__tilte">{{ intro.displayName }}</div>
     <div v-if="intro.description" class="listing__intro">
       <p>{{ intro.description }}</p>
     </div>
     <div class="articles">
       <VlFlexCard
-        v-for="(article, index) in articles"
+        v-for="(blog, index) in blogs"
         :key="'article_' + index"
-        :article-detail="article"
-        @click.stop="onCardClick(article.articleId)"
+        :blog-detail="blog"
+        @click.stop="onCardClick(blog._id)"
       />
     </div>
   </div>

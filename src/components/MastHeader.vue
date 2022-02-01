@@ -9,11 +9,11 @@ const navVisible = ref(false)
 const menus = ref([
   {
     name: '',
-    path: '',
-    subjects: [
+    displayName: '',
+    children: [
       {
-        path: '',
         name: '',
+        displayName: '',
       },
     ],
   },
@@ -26,15 +26,15 @@ function toHome() {
   navVisible.value = false
 }
 
-function toList(category: string, type: string) {
+function toList(category: string, tag: string) {
   router.push({
-    path: `/list/${category}/${type}`,
+    path: `/list/${category}/${tag}`,
   })
   navVisible.value = false
 }
 
-fetchApi.get(`/api/menu/list`).then((data) => {
-  menus.value = data
+fetchApi.get(`/api/tag/list`).then((data) => {
+  menus.value = data.menus
 })
 
 defineProps<{ title: string }>()
@@ -65,19 +65,19 @@ defineProps<{ title: string }>()
             class="nav__section"
           >
             <h2 class="nav__section-title">
-              <a class="nav__section-title-link">{{ menu.name }}</a>
+              <a class="nav__section-title-link">{{ menu.displayName }}</a>
             </h2>
             <ul class="nav__subnav">
               <li
-                v-for="(subject, subIndex) in menu.subjects"
-                :key="menu.path + '_' + subject.path + '_' + subIndex"
+                v-for="(child, subIndex) in menu.children"
+                :key="menu.name + '_' + child.name + '_' + subIndex"
                 class="nav__subnav-item"
               >
                 <div
                   class="nav__subnav-link"
-                  @click.stop="toList(menu.path, subject.path)"
+                  @click.stop="toList(menu.name, child.name)"
                 >
-                  {{ subject.name }}
+                  {{ child.displayName }}
                 </div>
               </li>
             </ul>
