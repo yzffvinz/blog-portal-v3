@@ -90,6 +90,7 @@ module.exports = {
   },
   globals: {
     defineProps: 'readonly',
+    defineEmits: 'readonly',
   },
   settings: {
     'import/parsers': {

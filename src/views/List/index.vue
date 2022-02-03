@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
 import fetchApi from '@/libs/fetchApi'
+import { useRoute } from 'vue-router'
 import VlFlexCard from '@components/VlFlexCard.vue'
 
 const intro = ref({
@@ -32,31 +32,25 @@ fetchApi
     ...params,
   })
   .then(({ tag, blogs: list }) => {
-    intro.value = tag
+    if (tag) {
+      intro.value = tag
+    }
     blogs.value = list
   })
-
-const router = useRouter()
-
-function onCardClick(articleId: string) {
-  router.push({
-    path: `/detail/${articleId}`,
-  })
-}
 </script>
 
 <template>
-  <div class="listing">
+  <div class="listing listing--cover">
     <div v-if="intro.name" class="listing__tilte">{{ intro.displayName }}</div>
     <div v-if="intro.description" class="listing__intro">
       <p>{{ intro.description }}</p>
     </div>
-    <div class="articles">
+    <div class="blogs">
       <VlFlexCard
         v-for="(blog, index) in blogs"
-        :key="'article_' + index"
+        :key="'blog_' + index"
+        class="blog__card"
         :blog-detail="blog"
-        @click.stop="onCardClick(blog._id)"
       />
     </div>
   </div>
@@ -65,13 +59,13 @@ function onCardClick(articleId: string) {
 <style lang="stylus">
 .listing
   padding 0 20px
-  padding-top 80px
+  padding-top 50px
   @media (min-width 600px)
-    padding-top 130px
+    padding-top 100px
   .listing__tilte
     max-width 750px
     text-align center
-    margin 0 auto 40px
+    margin 30px auto 40px
     font-size 30px
     line-height 38px
     @media (min-width 600px)
@@ -85,10 +79,14 @@ function onCardClick(articleId: string) {
     @media (min-width 600px)
       margin-top -30px
       margin-bottom 60px
-  .articles
+  .blogs
     display flex
     flex-wrap wrap
     flex-direction row
     justify-content space-between
     align-items flex-start
+    .blog__card
+      margin-bottom 30px
+      @media (min-width 600px)
+        margin-bottom 50px
 </style>

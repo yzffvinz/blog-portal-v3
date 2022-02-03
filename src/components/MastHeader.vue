@@ -26,14 +26,14 @@ function toHome() {
   navVisible.value = false
 }
 
-function toList(category: string, tag: string) {
+function toList(tag: string) {
   router.push({
-    path: `/list/${category}/${tag}`,
+    path: `/list/${tag}`,
   })
   navVisible.value = false
 }
 
-fetchApi.get(`/api/tag/list`).then((data) => {
+fetchApi.get(`/api/tag/menu`).then((data) => {
   menus.value = data.menus
 })
 
@@ -73,10 +73,7 @@ defineProps<{ title: string }>()
                 :key="menu.name + '_' + child.name + '_' + subIndex"
                 class="nav__subnav-item"
               >
-                <div
-                  class="nav__subnav-link"
-                  @click.stop="toList(menu.name, child.name)"
-                >
+                <div class="nav__subnav-link" @click.stop="toList(child.name)">
                   {{ child.displayName }}
                 </div>
               </li>
@@ -94,6 +91,7 @@ ul, ol, li
 .masthead-container
   position fixed
   width 100vw
+  z-index 1000
   .masthead
     padding 0 20px
     position relative

@@ -19,14 +19,7 @@ const router = createRouter({
           },
         },
         {
-          path: '/list/:category',
-          component: List,
-          meta: {
-            title: '列表',
-          },
-        },
-        {
-          path: '/list/:category/:tag',
+          path: '/list/:tag',
           component: List,
           meta: {
             title: '列表',
@@ -37,6 +30,20 @@ const router = createRouter({
           component: Detail,
           meta: {
             title: '详情',
+          },
+        },
+        {
+          path: '/edit/:id',
+          component: () => import('@/views/Add/index.vue'),
+          meta: {
+            title: '编辑',
+          },
+        },
+        {
+          path: '/add',
+          component: () => import('@/views/Add/index.vue'),
+          meta: {
+            title: '新增',
           },
         },
         {

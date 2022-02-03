@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { marked } from 'marked'
 import 'github-markdown-css/github-markdown-light.css'
 import fetchApi from '@/libs/fetchApi'
-import { useRoute } from 'vue-router'
 
 const { params } = useRoute()
 

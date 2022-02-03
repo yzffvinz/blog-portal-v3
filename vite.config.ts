@@ -11,6 +11,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
+        // target: 'https://liuwenzhe.com:443',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api/, '/api'),
       },
