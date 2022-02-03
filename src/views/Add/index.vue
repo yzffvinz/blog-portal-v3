@@ -36,7 +36,6 @@ const blogDetail = ref({
   title: '',
   cover: '',
   description: '',
-  author: 'Wenzhe',
   category: '',
   tags: [],
   content: '',
@@ -63,7 +62,7 @@ function submitForm() {
 </script>
 <template>
   <div class="add__container">
-    <ElForm ref="formRef" :model="blogDetail">
+    <ElForm ref="formRef" :model="blogDetail" label-position="top">
       <ElFormItem label="标题">
         <ElInput v-model="blogDetail.title"></ElInput>
       </ElFormItem>
@@ -72,9 +71,6 @@ function submitForm() {
       </ElFormItem>
       <ElFormItem label="描述">
         <ElInput v-model="blogDetail.description"></ElInput>
-      </ElFormItem>
-      <ElFormItem label="作者">
-        <ElInput v-model="blogDetail.author"></ElInput>
       </ElFormItem>
       <ElFormItem label="分类">
         <ElSelect v-model="blogDetail.category">
@@ -116,12 +112,13 @@ function submitForm() {
             'table',
             'image',
             '-',
+            'pageFullscreen',
             'preview',
           ]"
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" @click="submitForm()">Submit</ElButton>
+        <ElButton type="primary" @click="submitForm()">提交</ElButton>
       </ElFormItem>
     </ElForm>
   </div>

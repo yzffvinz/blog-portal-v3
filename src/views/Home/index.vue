@@ -34,14 +34,7 @@ function onCardClick(articleId: string) {
 </script>
 
 <template>
-  <div class="articles">
-    <VlFlexCard
-      v-for="(article, index) in articles"
-      :key="'article_' + index"
-      :article-detail="article"
-      @click.stop="onCardClick(article.articleId)"
-    />
-  </div>
+  <div class="articles"></div>
 </template>
 
 <style lang="stylus">
