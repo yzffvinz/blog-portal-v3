@@ -1,18 +1,18 @@
 import fetchApi from '@/libs/fetchApi'
 
-export function getBlogDetail(params) {
+export function getBlogDetail(params: any) {
   return fetchApi.get('/api/blog/detail', params)
 }
 
-export function getBlogList(params) {
+export function getBlogList(params: any) {
   return fetchApi.get('/api/blog/list', params)
 }
 
-export function addBlog(detail) {
+export function addBlog(detail: any) {
   return fetchApi.post('/api/blog/add', detail)
 }
 
-export function modBlog(detail) {
+export function modBlog(detail: any) {
   return fetchApi.post('/api/blog/modify', detail)
 }
 
