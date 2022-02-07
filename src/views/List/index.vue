@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import fetchApi from '@/libs/fetchApi'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import VlFlexCard from '@components/VlFlexCard.vue'
+import FloatElf from '@/components/FloatElf.vue'
+import { getBlogList } from '@/api/blog'
+import useMainStore from '@/store'
+
+const store = useMainStore()
 
 const intro = ref({
   name: '',
@@ -27,20 +31,25 @@ const blogs = ref([
 
 const { params } = useRoute()
 
-fetchApi
-  .get('/api/blog/list', {
-    ...params,
-  })
-  .then(({ tag, blogs: list }) => {
-    if (tag) {
-      intro.value = tag
-    }
-    blogs.value = list
-  })
+getBlogList({
+  ...params,
+}).then(({ tag, blogs: list }) => {
+  if (tag) {
+    intro.value = tag
+  }
+  blogs.value = list
+})
+
+const router = useRouter()
+
+function toAdd() {
+  router.push('/add')
+}
 </script>
 
 <template>
   <div class="listing listing--cover">
+    <FloatElf v-if="store.isLogin" @elf-click="toAdd">A</FloatElf>
     <div v-if="intro.name" class="listing__tilte">{{ intro.displayName }}</div>
     <div v-if="intro.description" class="listing__intro">
       <p>{{ intro.description }}</p>

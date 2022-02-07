@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import FloatElf from '@/components/FloatElf.vue'
 import { marked } from 'marked'
 import 'github-markdown-css/github-markdown-light.css'
-import fetchApi from '@/libs/fetchApi'
+import { getBlogDetail } from '@/api/blog'
+import useMainStore from '@/store'
 
 const { params } = useRoute()
+
+const router = useRouter()
+
+const store = useMainStore()
 
 const blogDetail = ref({
   _id: '',
@@ -20,7 +26,11 @@ const blogDetail = ref({
   content: '',
 })
 
-fetchApi.get(`/api/blog/detail`, { _id: params.id }).then(({ blog }) => {
+function toEdit() {
+  router.push(`/edit/${params.id}`)
+}
+
+getBlogDetail({ _id: params.id }).then(({ blog }) => {
   // marked 一下
   Object.assign(blog, {
     content: marked(blog.content),
@@ -31,6 +41,7 @@ fetchApi.get(`/api/blog/detail`, { _id: params.id }).then(({ blog }) => {
 
 <template>
   <article class="post__container">
+    <FloatElf v-if="store.isLogin" @elf-click="toEdit">M</FloatElf>
     <!-- header -->
     <header class="post__header">
       <div class="post__title">

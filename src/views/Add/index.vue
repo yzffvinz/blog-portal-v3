@@ -16,8 +16,11 @@ import 'element-plus/es/components/option/style/css'
 import 'element-plus/es/components/button/style/css'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-import { useRoute } from 'vue-router'
-import fetchApi from '@/libs/fetchApi'
+import { useRoute, useRouter } from 'vue-router'
+import { getMenus } from '@/api/tag'
+import { addBlog, getBlogDetail, modBlog } from '@/api/blog'
+
+const router = useRouter()
 
 const menus = ref([
   {
@@ -41,23 +44,28 @@ const blogDetail = ref({
   content: '',
 })
 
-fetchApi.get('/api/tag/menu').then((data) => {
+getMenus().then((data) => {
   menus.value = data.menus
 })
 
 const { params } = useRoute()
 
 if (params.id) {
-  fetchApi.get('/api/blog/detail', { _id: params.id }).then(({ blog }) => {
+  getBlogDetail({ _id: params.id }).then(({ blog }) => {
     blogDetail.value = blog
   })
 }
 
 function submitForm() {
-  const url = params.id ? '/api/blog/modify' : '/api/blog/add'
-  fetchApi.post(url, blogDetail.value).then((data) => {
-    console.log(data)
-  })
+  const reqApi = params.id ? modBlog : addBlog
+  reqApi(blogDetail.value)
+    .then((data) => {
+      const targetId = data.insertedId || params.id
+      router.push(`/detail/${targetId}`)
+    })
+    .catch((msg) => {
+      alert(msg)
+    })
 }
 </script>
 <template>

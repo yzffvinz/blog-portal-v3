@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import useMainStore from '@/store'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import fetchApi from '@/libs/fetchApi'
+import { getMenus } from '@/api/tag'
+
+const { isLogin } = storeToRefs(useMainStore())
 
 const router = useRouter()
 const navVisible = ref(false)
@@ -33,7 +37,7 @@ function toList(tag: string) {
   navVisible.value = false
 }
 
-fetchApi.get(`/api/tag/menu`).then((data) => {
+getMenus().then((data) => {
   menus.value = data.menus
 })
 
@@ -45,9 +49,7 @@ defineProps<{ title: string }>()
     <header class="masthead">
       <div class="masthead__content">
         <div class="masthead__logo-container" @click.stop="toHome">
-          <span class="masthead__logo">
-            {{ title }}
-          </span>
+          <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
       <div class="masthead__nav-icon" @click.stop="navVisible = !navVisible">
