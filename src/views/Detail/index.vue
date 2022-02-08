@@ -2,8 +2,8 @@
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import FloatElf from '@/components/FloatElf.vue'
-import { marked } from 'marked'
-import 'github-markdown-css/github-markdown-light.css'
+import MdEditor from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 import { getBlogDetail } from '@/api/blog'
 import useMainStore from '@/store'
 
@@ -32,9 +32,9 @@ function toEdit() {
 
 getBlogDetail({ _id: params.id }).then(({ blog }) => {
   // marked 一下
-  Object.assign(blog, {
-    content: marked(blog.content),
-  })
+  // Object.assign(blog, {
+  //   content: marked(blog.content),
+  // })
   blogDetail.value = blog
 })
 </script>
@@ -56,7 +56,12 @@ getBlogDetail({ _id: params.id }).then(({ blog }) => {
       <div class="article__column--main">
         <div class="article__body">
           <!-- eslint-disable-next-line vue/no-v-html -->
-          <article class="markdown-body" v-html="blogDetail.content"></article>
+          <!-- <article class="markdown-body" v-html="blogDetail.content"></article> -->
+          <MdEditor
+            :model-value="blogDetail.content"
+            show-code-row-number
+            preview-only
+          ></MdEditor>
         </div>
       </div>
       <!-- <div class="article__column--aside">1</div> -->

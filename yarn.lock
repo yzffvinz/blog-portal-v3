@@ -1227,11 +1227,6 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-github-markdown-css@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.npmmirror.com/github-markdown-css/download/github-markdown-css-5.1.0.tgz"
-  integrity sha512-QLtORwHHtUHhPMHu7i4GKfP6Vx5CWZn+NKQXe+cBhslY1HEt0CTEkP4d/vSROKV0iIJSpl4UtlQ16AD8C6lMug==
-
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.npmmirror.com/glob-parent/download/glob-parent-5.1.2.tgz?cache=0&sync_timestamp=1632956864970&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fglob-parent%2Fdownload%2Fglob-parent-5.1.2.tgz"
@@ -1567,11 +1562,6 @@ magic-string@^0.25.7:
   integrity sha1-P0l9b9NMZpxnmNy4IfLvMfVEUFE=
   dependencies:
     sourcemap-codec "^1.4.4"
-
-marked@^4.0.9:
-  version "4.0.9"
-  resolved "https://registry.npmmirror.com/marked/download/marked-4.0.9.tgz"
-  integrity sha512-HmoFvQwFLxNESeGupeOC+6CLb5WzcCWQmqvVetsErmrI3vrZ6gBumty5IP0ynLPR0zYSoVY7ITC1GffsYIGkog==
 
 md-editor-v3@^1.9.2:
   version "1.9.2"

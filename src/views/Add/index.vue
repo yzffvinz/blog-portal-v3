@@ -130,11 +130,15 @@ const rules = reactive({
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="正文" prop="content">
-        <MdEditor
-          v-model="blogDetail.content"
-          :preview="false"
-          preview-theme="github"
-          :toolbars="[
+        <MdEditor v-model="blogDetail.content" :preview="false" />
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton type="primary" @click="submitForm(ruleFormRef)"
+          >提交</ElButton
+        >
+      </ElFormItem>
+    </ElForm>
+    <!-- :toolbars="[
             'bold',
             'title',
             'quote',
@@ -147,15 +151,7 @@ const rules = reactive({
             '-',
             'pageFullscreen',
             'preview',
-          ]"
-        />
-      </ElFormItem>
-      <ElFormItem>
-        <ElButton type="primary" @click="submitForm(ruleFormRef)"
-          >提交</ElButton
-        >
-      </ElFormItem>
-    </ElForm>
+          ]" -->
   </div>
 </template>
 <style lang="stylus" scoped>
