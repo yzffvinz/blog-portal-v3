@@ -19,6 +19,13 @@ const router = createRouter({
           },
         },
         {
+          path: '/list/:category/:tag',
+          component: List,
+          meta: {
+            title: '列表',
+          },
+        },
+        {
           path: '/list/:tag',
           component: List,
           meta: {

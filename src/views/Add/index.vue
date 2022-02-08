@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import {
   ElForm,
   ElFormItem,
@@ -40,7 +40,7 @@ const blogDetail = ref({
   cover: '',
   description: '',
   category: '',
-  tags: [],
+  tags: [] as string[],
   content: '',
 })
 
@@ -48,30 +48,55 @@ getMenus().then((data) => {
   menus.value = data.menus
 })
 
-const { params } = useRoute()
+const { params, query } = useRoute()
 
+// 有id 为修改
 if (params.id) {
   getBlogDetail({ _id: params.id }).then(({ blog }) => {
     blogDetail.value = blog
   })
+} else {
+  // 新增
+  const { category, tag } = query as { category?: string; tag?: string }
+  if (category) blogDetail.value.category = category
+  if (tag) blogDetail.value.tags.push(tag)
 }
 
-function submitForm() {
-  const reqApi = params.id ? modBlog : addBlog
-  reqApi(blogDetail.value)
-    .then((data) => {
-      const targetId = data.insertedId || params.id
-      router.push(`/detail/${targetId}`)
-    })
-    .catch((msg) => {
-      alert(msg)
-    })
+function submitForm(formEl: any) {
+  formEl.validate((valid: boolean) => {
+    if (valid) {
+      const reqApi = params.id ? modBlog : addBlog
+      reqApi(blogDetail.value)
+        .then((data) => {
+          const targetId = data.insertedId || params.id
+          router.push(`/detail/${targetId}`)
+        })
+        .catch((msg) => {
+          alert(msg)
+        })
+      return true
+    }
+    console.log('error submit!')
+    return false
+  })
 }
+
+const ruleFormRef = ref()
+
+const rules = reactive({
+  title: { required: true },
+  content: { required: true },
+})
 </script>
 <template>
   <div class="add__container">
-    <ElForm ref="formRef" :model="blogDetail" label-position="top">
-      <ElFormItem label="标题">
+    <ElForm
+      ref="ruleFormRef"
+      :model="blogDetail"
+      :rules="rules"
+      label-position="top"
+    >
+      <ElFormItem label="标题" prop="title">
         <ElInput v-model="blogDetail.title"></ElInput>
       </ElFormItem>
       <ElFormItem label="封面">
@@ -104,7 +129,7 @@ function submitForm() {
           </template>
         </ElSelect>
       </ElFormItem>
-      <ElFormItem label="正文">
+      <ElFormItem label="正文" prop="content">
         <MdEditor
           v-model="blogDetail.content"
           :preview="false"
@@ -126,7 +151,9 @@ function submitForm() {
         />
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" @click="submitForm()">提交</ElButton>
+        <ElButton type="primary" @click="submitForm(ruleFormRef)"
+          >提交</ElButton
+        >
       </ElFormItem>
     </ElForm>
   </div>

@@ -30,9 +30,9 @@ function toHome() {
   navVisible.value = false
 }
 
-function toList(tag: string) {
+function toList(category: string, tag: string) {
   router.push({
-    path: `/list/${tag}`,
+    path: `/list/${category}/${tag}`,
   })
   navVisible.value = false
 }
@@ -75,7 +75,10 @@ defineProps<{ title: string }>()
                 :key="menu.name + '_' + child.name + '_' + subIndex"
                 class="nav__subnav-item"
               >
-                <div class="nav__subnav-link" @click.stop="toList(child.name)">
+                <div
+                  class="nav__subnav-link"
+                  @click.stop="toList(menu.name, child.name)"
+                >
                   {{ child.displayName }}
                 </div>
               </li>

@@ -5,6 +5,7 @@ import VlFlexCard from '@components/VlFlexCard.vue'
 import FloatElf from '@/components/FloatElf.vue'
 import { getBlogList } from '@/api/blog'
 import useMainStore from '@/store'
+import { obj2querystring } from '@/libs/url'
 
 const store = useMainStore()
 
@@ -43,7 +44,9 @@ getBlogList({
 const router = useRouter()
 
 function toAdd() {
-  router.push('/add')
+  const { category, tag } = params
+  const qs = obj2querystring({ category, tag })
+  router.push(`/add?${qs}`)
 }
 </script>
 
