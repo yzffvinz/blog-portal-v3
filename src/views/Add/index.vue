@@ -62,14 +62,17 @@ if (params.id) {
   if (tag) blogDetail.value.tags.push(tag)
 }
 
-function submitForm(formEl: any) {
+function submitForm(formEl: any, leave = true) {
   formEl.validate((valid: boolean) => {
     if (valid) {
-      const reqApi = params.id ? modBlog : addBlog
+      const isAdd = !params.id
+      const reqApi = isAdd ? addBlog : modBlog
       reqApi(blogDetail.value)
         .then((data) => {
-          const targetId = data.insertedId || params.id
-          router.push(`/detail/${targetId}`)
+          if (isAdd || leave) {
+            const targetId = data.insertedId || params.id
+            router.push(`/detail/${targetId}`)
+          }
         })
         .catch((msg) => {
           alert(msg)
@@ -130,7 +133,11 @@ const rules = reactive({
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="正文" prop="content">
-        <MdEditor v-model="blogDetail.content" :preview="false" />
+        <MdEditor
+          v-model="blogDetail.content"
+          :preview="false"
+          @save="submitForm(ruleFormRef, false)"
+        />
       </ElFormItem>
       <ElFormItem>
         <ElButton type="primary" @click="submitForm(ruleFormRef)"
@@ -138,20 +145,6 @@ const rules = reactive({
         >
       </ElFormItem>
     </ElForm>
-    <!-- :toolbars="[
-            'bold',
-            'title',
-            'quote',
-            'unorderedList',
-            'orderedList',
-            'code',
-            'codeRow',
-            'table',
-            'image',
-            '-',
-            'pageFullscreen',
-            'preview',
-          ]" -->
   </div>
 </template>
 <style lang="stylus" scoped>

@@ -58,7 +58,7 @@ function ontTagClick(tag: string) {
   <div class="article article--vertical">
     <div class="article__image-container">
       <div
-        class="article__image-wrap"
+        class="article__image-wrap clickable"
         @click.stop="onCardClick(blogDetail._id)"
       >
         <img
@@ -79,12 +79,15 @@ function ontTagClick(tag: string) {
       </TagTip>
     </ul>
     <div class="article__content">
-      <div class="article__title_s" @click.stop="onCardClick(blogDetail._id)">
+      <div
+        class="article__title_s clickable"
+        @click.stop="onCardClick(blogDetail._id)"
+      >
         {{ blogDetail.title }}
       </div>
       <div
         v-if="blogDetail.createtime"
-        class="article__date"
+        class="article__date clickable"
         @click.stop="onCardClick(blogDetail._id)"
       >
         {{ formatDate(blogDetail.createtime) }}

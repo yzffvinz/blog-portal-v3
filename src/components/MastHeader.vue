@@ -48,11 +48,14 @@ defineProps<{ title: string }>()
   <div class="masthead-container" :class="navVisible && 'nav-visible'">
     <header class="masthead">
       <div class="masthead__content">
-        <div class="masthead__logo-container" @click.stop="toHome">
+        <div class="masthead__logo-container clickable" @click.stop="toHome">
           <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
-      <div class="masthead__nav-icon" @click.stop="navVisible = !navVisible">
+      <div
+        class="masthead__nav-icon clickable"
+        @click.stop="navVisible = !navVisible"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -76,7 +79,7 @@ defineProps<{ title: string }>()
                 class="nav__subnav-item"
               >
                 <div
-                  class="nav__subnav-link"
+                  class="nav__subnav-link clickable"
                   @click.stop="toList(menu.name, child.name)"
                 >
                   {{ child.displayName }}

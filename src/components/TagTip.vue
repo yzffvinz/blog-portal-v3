@@ -7,7 +7,10 @@ defineProps<{
 const emit = defineEmits(['tagClick'])
 </script>
 <template>
-  <div class="article__category" @click.stop="$emit('tagClick', name)">
+  <div
+    class="article__category clickable"
+    @click.stop="$emit('tagClick', name)"
+  >
     <a>{{ displayName }}</a>
   </div>
 </template>
