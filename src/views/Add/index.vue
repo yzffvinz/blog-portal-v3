@@ -7,6 +7,7 @@ import {
   ElSelect,
   ElOption,
   ElButton,
+  ElSwitch,
 } from 'element-plus'
 import 'element-plus/es/components/form/style/css'
 import 'element-plus/es/components/form-item/style/css'
@@ -14,6 +15,7 @@ import 'element-plus/es/components/input/style/css'
 import 'element-plus/es/components/select/style/css'
 import 'element-plus/es/components/option/style/css'
 import 'element-plus/es/components/button/style/css'
+import 'element-plus/es/components/switch/style/css'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useRoute, useRouter } from 'vue-router'
@@ -42,6 +44,7 @@ const blogDetail = ref({
   category: '',
   tags: [] as string[],
   content: '',
+  hide: 0,
 })
 
 getMenus().then((data) => {
@@ -97,7 +100,8 @@ const rules = reactive({
       ref="ruleFormRef"
       :model="blogDetail"
       :rules="rules"
-      label-position="top"
+      label-position="right"
+      :label-width="55"
     >
       <ElFormItem label="标题" prop="title">
         <ElInput v-model="blogDetail.title"></ElInput>
@@ -139,10 +143,17 @@ const rules = reactive({
           @save="submitForm(ruleFormRef, false)"
         />
       </ElFormItem>
+      <ElFormItem label="私密">
+        <ElSwitch
+          v-model="blogDetail.hide"
+          :active-value="1"
+          :inactive-value="0"
+        ></ElSwitch>
+      </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" @click="submitForm(ruleFormRef)"
-          >提交</ElButton
-        >
+        <ElButton type="primary" @click="submitForm(ruleFormRef)">
+          提交
+        </ElButton>
       </ElFormItem>
     </ElForm>
   </div>
