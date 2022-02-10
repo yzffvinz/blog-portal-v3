@@ -59,6 +59,7 @@ getBlogDetail({ _id: params.id }).then(({ blog }) => {
           <!-- <article class="markdown-body" v-html="blogDetail.content"></article> -->
           <MdEditor
             :model-value="blogDetail.content"
+            preview-theme="github"
             show-code-row-number
             preview-only
           ></MdEditor>

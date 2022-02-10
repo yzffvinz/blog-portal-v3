@@ -139,6 +139,7 @@ const rules = reactive({
       <ElFormItem label="正文" prop="content">
         <MdEditor
           v-model="blogDetail.content"
+          preview-theme="github"
           :preview="false"
           @save="submitForm(ruleFormRef, false)"
         />
