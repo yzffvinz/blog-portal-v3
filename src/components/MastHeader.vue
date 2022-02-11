@@ -168,11 +168,10 @@ ul, ol, li
         .nav__section
           padding-bottom 32px
           order 0
-          flex-basis 100%
+          flex-basis 50%
           @media (min-width 600px)
             padding-bottom 48px
             color #a1a1a3
-            flex-basis 50%
           @media (min-width 800px)
             flex-basis 25%
           .nav__section-title
