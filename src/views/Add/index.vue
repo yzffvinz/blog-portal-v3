@@ -19,7 +19,7 @@ import 'element-plus/es/components/switch/style/css'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useRoute, useRouter } from 'vue-router'
-import { getMenus } from '@/api/tag'
+import { getCategories, getTags } from '@/api/tag'
 import { addBlog, getBlogDetail, modBlog } from '@/api/blog'
 
 const router = useRouter()
@@ -37,6 +37,20 @@ const menus = ref([
   },
 ])
 
+const categories = ref([
+  {
+    name: '',
+    displayName: '',
+  },
+])
+
+const tags = ref([
+  {
+    name: '',
+    displayName: '',
+  },
+])
+
 const blogDetail = ref({
   title: '',
   cover: '',
@@ -47,8 +61,12 @@ const blogDetail = ref({
   hide: 0,
 })
 
-getMenus().then((data) => {
-  menus.value = data.menus
+getCategories().then((data) => {
+  categories.value = data.categories
+})
+
+getTags().then((data) => {
+  tags.value = data.tags
 })
 
 const { params, query } = useRoute()
@@ -115,25 +133,23 @@ const rules = reactive({
       <ElFormItem label="分类">
         <ElSelect v-model="blogDetail.category">
           <ElOption
-            v-for="menu in menus"
-            :key="'category_' + menu.name"
-            :value="menu.name"
-            :label="menu.displayName"
+            v-for="category in categories"
+            :key="'category_' + category.name"
+            :value="category.name"
+            :label="category.displayName"
           >
           </ElOption>
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="标签">
-        <ElSelect v-model="blogDetail.tags" :multiple="true">
-          <template v-for="(menu, mi) in menus">
-            <ElOption
-              v-for="(tag, ti) in menu.children"
-              :key="'category_' + mi + '_' + ti"
-              :value="tag.name"
-              :label="tag.displayName"
-            >
-            </ElOption>
-          </template>
+        <ElSelect v-model="blogDetail.tags" multiple filterable>
+          <ElOption
+            v-for="(tag, ti) in tags"
+            :key="'category_' + ti"
+            :value="tag.name"
+            :label="tag.displayName"
+          >
+          </ElOption>
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="正文" prop="content">
