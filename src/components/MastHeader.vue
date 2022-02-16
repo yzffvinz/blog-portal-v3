@@ -98,6 +98,8 @@ defineProps<{ title: string }>()
 </template>
 
 <style lang="stylus" scoped>
+ul, ol, li
+  list-style none
 .masthead-container
   .masthead
     padding 0 20px

@@ -88,4 +88,7 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
         font-size 38px
       @media (min-width 1000px)
         font-size 50px
+    .article__body
+      ul
+        list-style-type disc
 </style>
