@@ -16,6 +16,7 @@ const router = createRouter({
           component: List,
           meta: {
             title: '首页',
+            keepAlive: true,
           },
         },
         {
@@ -23,6 +24,7 @@ const router = createRouter({
           component: List,
           meta: {
             title: '列表',
+            keepAlive: true,
           },
         },
         {

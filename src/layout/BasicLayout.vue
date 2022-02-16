@@ -6,9 +6,20 @@ import MastHeader from '@components/MastHeader.vue'
   <MastHeader title="B👀 Ming✨" />
   <router-view v-slot="{ Component }">
     <transition>
-      <keep-alive>
-        <component :is="Component" :key="$route.fullPath" />
-      </keep-alive>
+      <div>
+        <keep-alive>
+          <component
+            :is="Component"
+            v-if="$route.meta.keepAlive"
+            :key="$route.fullPath"
+          />
+        </keep-alive>
+        <component
+          :is="Component"
+          v-if="!$route.meta.keepAlive"
+          :key="$route.fullPath"
+        />
+      </div>
     </transition>
   </router-view>
 </template>
