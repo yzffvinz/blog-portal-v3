@@ -4,7 +4,13 @@ import MastHeader from '@components/MastHeader.vue'
 
 <template>
   <MastHeader title="B👀 Ming✨" />
-  <router-view :key="$route.fullPath"></router-view>
+  <router-view v-slot="{ Component }">
+    <transition>
+      <keep-alive>
+        <component :is="Component" :key="$route.fullPath" />
+      </keep-alive>
+    </transition>
+  </router-view>
 </template>
 
 <style lang="stylus">
