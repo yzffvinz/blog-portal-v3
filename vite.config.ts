@@ -10,8 +10,8 @@ export default defineConfig({
     port: 8083,
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
-        // target: 'https://liuwenzhe.com:443',
+        // target: 'http://localhost:3000',
+        target: 'https://liuwenzhe.com',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api/, '/api'),
       },

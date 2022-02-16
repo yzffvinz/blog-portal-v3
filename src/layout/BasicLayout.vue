@@ -4,9 +4,7 @@ import MastHeader from '@components/MastHeader.vue'
 
 <template>
   <MastHeader title="B👀 Ming✨" />
-  <div class="container">
-    <router-view :key="$route.fullPath"></router-view>
-  </div>
+  <router-view :key="$route.fullPath"></router-view>
 </template>
 
 <style lang="stylus">

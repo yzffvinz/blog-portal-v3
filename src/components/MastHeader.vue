@@ -43,15 +43,21 @@ defineProps<{ title: string }>()
 </script>
 
 <template>
-  <div class="masthead-container" :class="navVisible && 'nav-visible'">
+  <div
+    class="masthead-container fixed w-screen z-50"
+    :class="navVisible && 'nav-visible'"
+  >
     <header class="masthead">
       <div class="masthead__content">
-        <div class="masthead__logo-container clickable" @click.stop="toHome">
+        <div
+          class="masthead__logo-container cursor-pointer"
+          @click.stop="toHome"
+        >
           <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
       <div
-        class="masthead__nav-icon clickable"
+        class="masthead__nav-icon cursor-pointer"
         @click.stop="navVisible = !navVisible"
       >
         <span></span>
@@ -92,12 +98,7 @@ defineProps<{ title: string }>()
 </template>
 
 <style lang="stylus" scoped>
-ul, ol, li
-  list-style none
 .masthead-container
-  position fixed
-  width 100vw
-  z-index 1000
   .masthead
     padding 0 20px
     position relative

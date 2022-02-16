@@ -51,13 +51,23 @@ function toAdd() {
 </script>
 
 <template>
-  <div class="listing listing--cover">
+  <div class="listing pt-12 sm:pt-24 sm:px-5">
     <FloatElf v-if="store.isLogin" @elf-click="toAdd">A</FloatElf>
-    <div v-if="intro.name" class="listing__tilte">{{ intro.displayName }}</div>
-    <div v-if="intro.description" class="listing__intro">
+    <div
+      v-if="intro.name"
+      class="listing__tilte mx-auto mt-8 mb-10 max-w-3xl text-4xl text-center sm:mb-14"
+    >
+      {{ intro.displayName }}
+    </div>
+    <div
+      v-if="intro.description"
+      class="-mt-2 mx-auto mb-10 max-w-screen-sm text-center sm:mb-16"
+    >
       <p>{{ intro.description }}</p>
     </div>
-    <div class="blogs">
+    <div
+      class="blogs grid grid-cols-1 sm:grid-cols-2 sm:gap-1/25 gap-y-10 sm:gap-y-10 lg:grid-cols-3"
+    >
       <VlFlexCard
         v-for="(blog, index) in blogs"
         :key="'blog_' + index"
@@ -68,37 +78,4 @@ function toAdd() {
   </div>
 </template>
 
-<style lang="stylus">
-.listing
-  padding 0 20px
-  padding-top 50px
-  @media (min-width 600px)
-    padding-top 100px
-  .listing__tilte
-    max-width 750px
-    text-align center
-    margin 30px auto 40px
-    font-size 30px
-    line-height 38px
-    @media (min-width 600px)
-      margin-bottom 60px
-      font-size 38px
-      line-height 52px
-  .listing__intro
-    max-width 600px
-    margin -10px auto 40px
-    text-align center
-    @media (min-width 600px)
-      margin-top -30px
-      margin-bottom 60px
-  .blogs
-    display flex
-    flex-wrap wrap
-    flex-direction row
-    justify-content space-between
-    align-items flex-start
-    .blog__card
-      margin-bottom 30px
-      @media (min-width 600px)
-        margin-bottom 50px
-</style>
+<style lang="stylus"></style>
