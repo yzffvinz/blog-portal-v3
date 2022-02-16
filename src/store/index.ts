@@ -9,12 +9,12 @@ const useMainStore = defineStore('main', {
     }
   },
   getters: {
-    isLogin(): any {
+    isLogin(): boolean {
       return this.user.login
     },
   },
   actions: {
-    setUserLogin(isLogin: any) {
+    setUserLogin(isLogin: boolean) {
       this.user.login = isLogin
     },
   },

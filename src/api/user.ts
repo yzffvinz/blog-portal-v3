@@ -1,23 +1,20 @@
 import fetchApi from '@/libs/fetchApi'
 import useMainStore from '@/store'
 
-let store: any = null
-function getStore() {
-  if (!store) {
-    store = useMainStore()
-  }
-  return store
+interface LoginParams {
+  username: string
+  password: string
 }
 
 export function syncUserStatus() {
   return fetchApi.get('/api/user/status').then(({ isLogin }) => {
-    getStore().setUserLogin(isLogin)
+    useMainStore().setUserLogin(isLogin)
   })
 }
 
-export function userLogin(params: any) {
+export function userLogin(params: LoginParams) {
   return fetchApi.post('/api/user/login', params).then((data) => {
-    getStore().setUserLogin(true)
+    useMainStore().setUserLogin(true)
   })
 }
 

@@ -8,6 +8,7 @@ import { getBlogDetail } from '@/api/blog'
 import useMainStore from '@/store'
 
 const { params } = useRoute()
+const { id } = params as { id: string }
 
 const router = useRouter()
 
@@ -27,14 +28,10 @@ const blogDetail = ref({
 })
 
 function toEdit() {
-  router.push(`/edit/${params.id}`)
+  router.push(`/edit/${id}`)
 }
 
-getBlogDetail({ _id: params.id }).then(({ blog }) => {
-  // marked 一下
-  // Object.assign(blog, {
-  //   content: marked(blog.content),
-  // })
+getBlogDetail({ _id: id }).then(({ blog }) => {
   blogDetail.value = blog
 })
 </script>
@@ -45,7 +42,6 @@ getBlogDetail({ _id: params.id }).then(({ blog }) => {
     <!-- header -->
     <header class="post__header">
       <div class="post__title">
-        <!-- {{ infos.type }} {{ infos.tag }} -->
         <h1>
           {{ blogDetail.title }}
         </h1>
@@ -55,8 +51,6 @@ getBlogDetail({ _id: params.id }).then(({ blog }) => {
     <div class="article__columns">
       <div class="article__column--main">
         <div class="article__body">
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <!-- <article class="markdown-body" v-html="blogDetail.content"></article> -->
           <MdEditor
             :model-value="blogDetail.content"
             preview-theme="github"
@@ -65,7 +59,6 @@ getBlogDetail({ _id: params.id }).then(({ blog }) => {
           ></MdEditor>
         </div>
       </div>
-      <!-- <div class="article__column--aside">1</div> -->
     </div>
   </article>
 </template>

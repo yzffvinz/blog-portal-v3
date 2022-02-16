@@ -1,18 +1,37 @@
 import fetchApi from '@/libs/fetchApi'
 
-export function getBlogDetail(params: any) {
+interface BlogDetailParams {
+  _id: string
+}
+
+interface BlogListParams {
+  tag?: string
+}
+
+export interface BlogDetail {
+  _id?: string
+  title: string
+  cover: string
+  description: string
+  category: string
+  tags: string[]
+  content: string
+  hide: number
+}
+
+export function getBlogDetail(params: BlogDetailParams) {
   return fetchApi.get('/api/blog/detail', params)
 }
 
-export function getBlogList(params: any) {
+export function getBlogList(params: BlogListParams) {
   return fetchApi.get('/api/blog/list', params)
 }
 
-export function addBlog(detail: any) {
+export function addBlog(detail: BlogDetail) {
   return fetchApi.post('/api/blog/add', detail)
 }
 
-export function modBlog(detail: any) {
+export function modBlog(detail: BlogDetail) {
   return fetchApi.post('/api/blog/modify', detail)
 }
 

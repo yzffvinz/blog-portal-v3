@@ -22,20 +22,13 @@ import { useRoute, useRouter } from 'vue-router'
 import { getCategories, getTags } from '@/api/tag'
 import { addBlog, getBlogDetail, modBlog } from '@/api/blog'
 
+interface ValidateForm {
+  validate: (validateFunc: (valid: boolean) => boolean) => void
+}
+
 const router = useRouter()
 
-const menus = ref([
-  {
-    name: '',
-    displayName: '',
-    children: [
-      {
-        name: '',
-        displayName: '',
-      },
-    ],
-  },
-])
+const ruleFormRef = ref()
 
 const categories = ref([
   {
@@ -73,17 +66,17 @@ const { params, query } = useRoute()
 
 // 有id 为修改
 if (params.id) {
-  getBlogDetail({ _id: params.id }).then(({ blog }) => {
+  const { id } = params as { id: string }
+  getBlogDetail({ _id: id }).then(({ blog }) => {
     blogDetail.value = blog
   })
 } else {
-  // 新增
   const { category, tag } = query as { category?: string; tag?: string }
   if (category) blogDetail.value.category = category
   if (tag) blogDetail.value.tags.push(tag)
 }
 
-function submitForm(formEl: any, leave = true) {
+function submitForm(formEl: ValidateForm, leave = true) {
   formEl.validate((valid: boolean) => {
     if (valid) {
       const isAdd = !params.id
@@ -104,8 +97,6 @@ function submitForm(formEl: any, leave = true) {
     return false
   })
 }
-
-const ruleFormRef = ref()
 
 const rules = reactive({
   title: { required: true },

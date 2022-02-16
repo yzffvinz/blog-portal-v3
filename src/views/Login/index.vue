@@ -22,7 +22,7 @@ function toHome() {
 
 function login() {
   const password = md5(user.value.password)
-  userLogin({ ...user.value, password }).then(() => {
+  userLogin({ username: user.value.username, password }).then(() => {
     toHome()
   })
 }

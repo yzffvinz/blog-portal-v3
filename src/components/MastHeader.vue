@@ -5,8 +5,6 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { getMenus } from '@/api/tag'
 
-const { isLogin } = storeToRefs(useMainStore())
-
 const router = useRouter()
 const navVisible = ref(false)
 
@@ -32,7 +30,7 @@ function toHome() {
 
 function toList(category: string, tag: string) {
   router.push({
-    path: `/list/${category}/${tag}`,
+    path: `/list/${tag}`,
   })
   navVisible.value = false
 }
