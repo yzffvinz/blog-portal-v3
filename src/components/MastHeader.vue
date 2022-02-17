@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import useMainStore from '@/store'
-import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { getMenus } from '@/api/tag'
 
@@ -47,43 +45,54 @@ defineProps<{ title: string }>()
     class="masthead-container fixed w-screen z-50"
     :class="navVisible && 'nav-visible'"
   >
-    <header class="masthead">
+    <header
+      class="masthead px-5 relative z-50 flex items-center justify-center max-w-screen-xl h-12 transition bg-white border-solid border-0 border-b border-divide sm:h-16"
+    >
       <div class="masthead__content">
         <div
-          class="masthead__logo-container cursor-pointer"
+          class="masthead__logo-container relative cursor-pointer text-xl sm:text-3xl"
           @click.stop="toHome"
         >
           <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
       <div
-        class="masthead__nav-icon cursor-pointer"
+        class="masthead__nav-icon absolute right-5 inline-block overflow-hidden w-6 h-5 cursor-pointer"
         @click.stop="navVisible = !navVisible"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span
+          v-for="(s, i) in new Array(3)"
+          :key="'icon-span_' + i"
+          class="absolute block transition-transform right-0 bg-black"
+        >
+        </span>
       </div>
     </header>
-    <div class="nav">
-      <div class="nav__content">
-        <ul class="nav__sections">
+    <div
+      class="nav fixed z-45 inset-0 w-0 h-0 opacity-0 bg-menu-bg transition-all text-white overflow-auto"
+    >
+      <div
+        class="nav__content mx-auto my-0 max-w-screen-xl px-5 pt-20 pb-16 sm:pt-28"
+      >
+        <ul class="nav__sections grid grid-cols-2 md:grid-cols-4">
           <li
             v-for="(menu, index) in menus"
             :key="'nav_' + index"
-            class="nav__section"
+            class="nav__section pb-8 sm:pd-12"
           >
-            <h2 class="nav__section-title">
-              <a class="nav__section-title-link">{{ menu.displayName }}</a>
+            <h2 class="nav__section-title text-menu-title">
+              <a class="nav__section-title-link text-lg sm:text-2xl">{{
+                menu.displayName
+              }}</a>
             </h2>
-            <ul class="nav__subnav">
+            <ul class="nav__subna pr-2.5 sm:pr-0">
               <li
                 v-for="(child, subIndex) in menu.children"
                 :key="menu.name + '_' + child.name + '_' + subIndex"
                 class="nav__subnav-item"
               >
                 <div
-                  class="nav__subnav-link clickable"
+                  class="nav__subnav-link text-white text-lg sm:text-2xl cursor-pointer"
                   @click.stop="toList(menu.name, child.name)"
                 >
                   {{ child.displayName }}
@@ -102,40 +111,10 @@ ul, ol, li
   list-style none
 .masthead-container
   .masthead
-    padding 0 20px
-    position relative
-    z-index 1000
-    display flex
-    align-items center
-    justify-content center
-    max-width 1280px
-    background #fff
-    transition background 0.2s ease-in-out
-    height 50px
-    border-bottom 1px #cdcdcd solid
-    @media (min-width 600px)
-      height 70px
-    .masthead__logo-container
-      position relative
-      font-size 20px
-      @media (min-width 600px)
-        font-size 30px
     .masthead__nav-icon
-      position absolute
-      right 20px
-      overflow hidden
-      display inline-block
-      width 24px
-      height 20px
       span
-        display block
-        position absolute
         width 18px
         height 3px
-        background #000
-        text-indent -1000em
-        right 0
-        transition transform 0.2s ease-in-out
         &:nth-child(1)
           top 3px
         &:nth-child(2)
@@ -143,56 +122,7 @@ ul, ol, li
         &:nth-child(3)
           top 17px
   .nav
-    z-index 999
-    position fixed
-    left 0
-    top 0
-    right 0
-    bottom 0
-    width 0
-    height 0
     visibility hidden
-    opacity 0
-    transition visibility 0s linear 0.2s, opacity 0.2s ease-in-out
-    background #222223
-    overflow auto
-    color #fff
-    .nav__content
-      max-width 1280px
-      margin 0 auto
-      padding 80px 20px 64px
-      @media (min-width 600px)
-        padding 110px 20px 64px
-      .nav__sections
-        display flex
-        flex-wrap wrap
-        .nav__section
-          padding-bottom 32px
-          order 0
-          flex-basis 50%
-          @media (min-width 600px)
-            padding-bottom 48px
-            color #a1a1a3
-          @media (min-width 800px)
-            flex-basis 25%
-          .nav__section-title
-            .nav__section-title-link
-              color #a1a1a3
-              font-size 18px
-              line-height 27px
-              @media (min-width 600px)
-                font-size 22px
-                line-height 33px
-          .nav__subnav-item
-            padding-right 10px
-            @media (min-width 600px)
-              padding-right 0
-            .nav__subnav-link
-              color #fff
-              font-size 18px
-              line-height 1.6
-              @media (min-width 600px)
-                font-size 22px
 .nav-visible
   .masthead
     background #222223

@@ -104,7 +104,7 @@ const rules = reactive({
 })
 </script>
 <template>
-  <div class="add__container">
+  <div class="add__container pt-24 px-5 pb-16">
     <ElForm
       ref="ruleFormRef"
       :model="blogDetail"
@@ -166,9 +166,3 @@ const rules = reactive({
     </ElForm>
   </div>
 </template>
-<style lang="stylus" scoped>
-.add__container
-  padding 100px 20px 60px
-  *
-    margin-bottom 20px
-</style>

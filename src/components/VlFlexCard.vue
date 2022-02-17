@@ -91,7 +91,7 @@ function ontTagClick(tag: string) {
         </div>
         <div
           v-if="blogDetail.createtime"
-          class="article__date cursor-pointer text-sm mt-4 text-c-gary"
+          class="article__date cursor-pointer text-sm mt-4 text-gray"
           @click.stop="onCardClick(blogDetail._id)"
         >
           {{ formatDate(blogDetail.createtime) }}

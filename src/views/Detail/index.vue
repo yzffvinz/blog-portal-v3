@@ -37,11 +37,17 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
 </script>
 
 <template>
-  <article class="post__container">
+  <article
+    class="post__container max-w-screen-xl mx-auto my-0 pt-20 px-5 sm:pt-32"
+  >
     <FloatElf v-if="store.isLogin" @elf-click="toEdit">M</FloatElf>
     <!-- header -->
-    <header class="post__header">
-      <div class="post__title">
+    <header
+      class="post__header pb-12 lg:mb-16 lg:border-solid lg:border-0 lg:border-b lg:border-divide"
+    >
+      <div
+        class="post__title px-auto py-0 mx-auto w-3/4 max-w-3xl text-center break-normal text-2xl sm:text-4xl lg:text-5xl"
+      >
         <h1>
           {{ blogDetail.title }}
         </h1>
@@ -62,33 +68,3 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
     </div>
   </article>
 </template>
-
-<style lang="stylus" scoped>
-.post__container
-  max-width 1280px
-  margin 0 auto
-  padding 0 20px
-  padding-top 80px
-  @media (min-width 600px)
-    padding-top 125px
-  .post__header
-    padding-bottom 60px
-    @media (min-width 1000px)
-      padding-bottom 60px
-      margin-bottom 60px
-      border-bottom 1px #e3e3e3 solid
-    .post__title
-      margin 0 auto
-      max-width 750px
-      text-align center
-      line-height 1.3
-      word-wrap break-word
-      font-size 26px
-      @media (min-width 600px)
-        font-size 38px
-      @media (min-width 1000px)
-        font-size 50px
-    .article__body
-      ul
-        list-style-type disc
-</style>

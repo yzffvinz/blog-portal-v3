@@ -33,7 +33,7 @@ if (useMainStore().isLogin) {
 </script>
 
 <template>
-  <div class="login__wrapper">
+  <div class="login__wrapper pt-40 px-5">
     <ElForm ref="formRef" :model="user" :label-width="90" label-position="top">
       <ElFormItem label="用户名">
         <ElInput v-model="user.username"></ElInput>
@@ -51,8 +51,3 @@ if (useMainStore().isLogin) {
     </ElForm>
   </div>
 </template>
-
-<style lang="stylus">
-.login__wrapper
-  padding 120px 20px 0px
-</style>

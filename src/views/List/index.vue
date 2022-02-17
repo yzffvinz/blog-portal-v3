@@ -77,5 +77,3 @@ function toAdd() {
     </div>
   </div>
 </template>
-
-<style lang="stylus"></style>
