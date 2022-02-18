@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getMenus } from '@/api/tag'
+import MenuIcon from './MenuIcon.vue'
 
 const router = useRouter()
 const navVisible = ref(false)
@@ -18,6 +19,10 @@ const menus = ref([
     ],
   },
 ])
+
+function toggleUnfold(status: boolean) {
+  navVisible.value = status
+}
 
 function toHome() {
   router.push({
@@ -56,20 +61,13 @@ defineProps<{ title: string }>()
           <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
-      <div
-        class="masthead__nav-icon absolute right-5 inline-block overflow-hidden w-6 h-5 cursor-pointer"
-        @click.stop="navVisible = !navVisible"
-      >
-        <span
-          v-for="(s, i) in new Array(3)"
-          :key="'icon-span_' + i"
-          class="absolute block transition-transform right-0 bg-black"
-        >
-        </span>
-      </div>
+      <MenuIcon
+        :init-unfold-status="navVisible"
+        @menu-click="toggleUnfold"
+      ></MenuIcon>
     </header>
     <div
-      class="nav fixed z-45 inset-0 w-0 h-0 opacity-0 bg-menu-bg transition-all text-white overflow-auto"
+      class="nav visible fixed z-45 inset-0 w-0 h-0 opacity-0 bg-menu-bg transition-all text-white overflow-auto"
     >
       <div
         class="nav__content mx-auto my-0 max-w-screen-xl px-5 pt-20 pb-16 sm:pt-28"
@@ -109,33 +107,10 @@ defineProps<{ title: string }>()
 <style lang="stylus" scoped>
 ul, ol, li
   list-style none
-.masthead-container
-  .masthead
-    .masthead__nav-icon
-      span
-        width 18px
-        height 3px
-        &:nth-child(1)
-          top 3px
-        &:nth-child(2)
-          top 10px
-        &:nth-child(3)
-          top 17px
-  .nav
-    visibility hidden
 .nav-visible
   .masthead
     background #222223
     color #fff
-    .masthead__nav-icon
-      span
-        background #fff
-        &:nth-child(1)
-          transform translateY(7px) rotate(45deg)
-        &:nth-child(2)
-          transform rotate(45deg)
-        &:nth-child(3)
-          transform translateY(-7px) rotate(-45deg)
   .nav
     visibility visible
     opacity 1

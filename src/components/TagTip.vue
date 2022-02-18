@@ -1,50 +1,43 @@
 <script setup lang="ts">
-defineProps<{
-  name: string
-  displayName: string
-}>()
+import { ref } from 'vue'
+
+const props = defineProps({
+  name: {
+    type: String,
+    default: undefined,
+  },
+  displayName: {
+    type: String,
+    default: 'unknown',
+  },
+  color: {
+    type: String,
+    default: '#ffc832',
+  },
+})
 
 const emit = defineEmits(['tagClick'])
+
+const styleLine = `
+  --unline-color: ${props.color};
+  --tw-contents: '';
+`
 </script>
 <template>
   <div
-    class="article__category clickable"
-    @click.stop="$emit('tagClick', name)"
+    class="article__category cursor-pointer inline-block font-bold text-xs text-black whitespace-nowrap uppercase"
+    @click.stop="emit('tagClick', name)"
   >
-    <a>{{ displayName }}</a>
+    <a
+      class="inline-block relative z-0 pb-1 text-black no-underline mr-4 after:absolute after:left-0 after:bottom-0.5 after:h-0.5 after:w-full after:bg-black after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-0"
+      :style="styleLine"
+      >{{ displayName }}</a
+    >
   </div>
 </template>
 
 <style lang="stylus" scoped>
-.article__category
-  display inline-block
-  font-weight bold
-  font-size 13px
-  line-height 23px
-  color #000
-  word-wrap nowrap
-  text-transform uppercase
-  a
-    display inline-block
-    position relative
-    z-index 0
-    padding-bottom 3px
-    color #000
-    text-decoration none
-    border-bottom-color #ffc832
-    margin-right 15px
-    &:after
-      content ''
-      position absolute
-      left 0
-      width 100%
-      bottom 2px
-      height 2px
-      background-color #000
-      transform-origin 50%
-      transition all 0.3s ease-in-out
-      background-color #ffc832
-    &:hover
-      &::after
-        transform scaleX(0)
+.article__category a:after
+  content ''
+  background-color var(--unline-color)
 </style>
