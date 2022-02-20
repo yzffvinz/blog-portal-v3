@@ -21,6 +21,7 @@ import 'md-editor-v3/lib/style.css'
 import { useRoute, useRouter } from 'vue-router'
 import { getCategories, getTags } from '@/api/tag'
 import { addBlog, getBlogDetail, modBlog } from '@/api/blog'
+import upload from '@/biz/uploadApi'
 
 interface ValidateForm {
   validate: (validateFunc: (valid: boolean) => boolean) => void
@@ -64,9 +65,10 @@ getTags().then((data) => {
 
 const { params, query } = useRoute()
 
+const { id } = params as { id: string | undefined }
+
 // 有id 为修改
-if (params.id) {
-  const { id } = params as { id: string }
+if (id) {
   getBlogDetail({ _id: id }).then(({ blog }) => {
     blogDetail.value = blog
   })
@@ -93,9 +95,12 @@ function submitForm(formEl: ValidateForm, leave = true) {
         })
       return true
     }
-    console.log('error submit!')
     return false
   })
+}
+
+function uploadImg(files: FileList, callback: (imgs: string[]) => void) {
+  upload(files, callback, id || undefined)
 }
 
 const rules = reactive({
@@ -148,6 +153,8 @@ const rules = reactive({
           v-model="blogDetail.content"
           preview-theme="github"
           :preview="false"
+          :toolbars-exclude="['htmlPreview']"
+          @upload-img="uploadImg"
           @save="submitForm(ruleFormRef, false)"
         />
       </ElFormItem>

@@ -7,14 +7,16 @@ interface LoginParams {
 }
 
 export function syncUserStatus() {
-  return fetchApi.get('/api/user/status').then(({ isLogin }) => {
+  return fetchApi.get('/api/user/status').then(({ isLogin, userInfo }) => {
     useMainStore().setUserLogin(isLogin)
+    useMainStore().setUserInfo(userInfo)
   })
 }
 
 export function userLogin(params: LoginParams) {
   return fetchApi.post('/api/user/login', params).then((data) => {
     useMainStore().setUserLogin(true)
+    syncUserStatus()
   })
 }
 
