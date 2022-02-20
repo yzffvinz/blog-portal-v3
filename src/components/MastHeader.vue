@@ -20,8 +20,8 @@ const menus = ref([
   },
 ])
 
-function toggleUnfold(status: boolean) {
-  navVisible.value = status
+function toggleUnfold() {
+  navVisible.value = !navVisible.value
 }
 
 function toHome() {
@@ -61,10 +61,7 @@ defineProps<{ title: string }>()
           <span class="masthead__logo"> {{ title }} </span>
         </div>
       </div>
-      <MenuIcon
-        :init-unfold-status="navVisible"
-        @menu-click="toggleUnfold"
-      ></MenuIcon>
+      <MenuIcon :unfold="navVisible" @menu-click="toggleUnfold"></MenuIcon>
     </header>
     <div
       class="nav visible fixed z-45 inset-0 w-0 h-0 opacity-0 bg-menu-bg transition-all text-white overflow-auto"

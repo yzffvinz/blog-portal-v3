@@ -3,14 +3,11 @@ import { ref } from 'vue'
 
 const emit = defineEmits(['menuClick'])
 const props = defineProps<{
-  initUnfoldStatus: boolean
+  unfold: boolean
 }>()
 
-const unfold = ref(false)
-
 function toggleUnfold() {
-  unfold.value = !unfold.value
-  emit('menuClick', unfold.value)
+  emit('menuClick')
 }
 </script>
 <template>
