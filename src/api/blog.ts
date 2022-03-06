@@ -6,6 +6,8 @@ interface BlogDetailParams {
 
 interface BlogListParams {
   tag?: string
+  pnum: number
+  psize: number
 }
 
 export interface BlogDetail {

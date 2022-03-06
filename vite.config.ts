@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,8 +11,8 @@ export default defineConfig({
     port: 8083,
     proxy: {
       '/api': {
-        // target: 'http://localhost:3000',
-        target: 'https://liuwenzhe.com',
+        target: 'http://localhost:3000',
+        // target: 'https://liuwenzhe.com',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api/, '/api'),
       },
