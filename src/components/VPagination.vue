@@ -31,7 +31,7 @@ const end = computed(() => {
 </script>
 
 <template>
-  <nav class="mt-8 msm:px-5">
+  <nav class="my-8 msm:px-5">
     <div class="grid grid-cols-3 text-base">
       <div>
         <a
