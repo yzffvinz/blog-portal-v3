@@ -63,7 +63,7 @@ function ontTagClick(tag: string) {
       >
         <img
           v-if="blogDetail.cover"
-          class="article__image"
+          class="article__image min-w-full"
           :src="blogDetail.cover"
         />
       </div>
