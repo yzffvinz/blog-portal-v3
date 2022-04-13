@@ -1,33 +1,35 @@
 <script setup lang="ts">
 import MastHeader from '@components/MastHeader.vue'
+import BasicFooter from '@/components/BasicFooter.vue'
 </script>
 
 <template>
-  <MastHeader title="B👀 Ming✨" />
-  <router-view v-slot="{ Component }">
-    <transition>
-      <div>
-        <keep-alive>
+  <div class="content__center">
+    <MastHeader title="B👀 Ming✨" />
+    <router-view v-slot="{ Component }">
+      <transition>
+        <div>
+          <keep-alive>
+            <component
+              :is="Component"
+              v-if="$route.meta.keepAlive"
+              :key="$route.fullPath"
+            />
+          </keep-alive>
           <component
             :is="Component"
-            v-if="$route.meta.keepAlive"
+            v-if="!$route.meta.keepAlive"
             :key="$route.fullPath"
           />
-        </keep-alive>
-        <component
-          :is="Component"
-          v-if="!$route.meta.keepAlive"
-          :key="$route.fullPath"
-        />
-      </div>
-    </transition>
-  </router-view>
+        </div>
+      </transition>
+    </router-view>
+  </div>
+  <BasicFooter />
 </template>
 
 <style lang="stylus">
-#app
-  margin 0 auto
-  display relative
+.content__center
   max-width 1280px
-  padding-bottom 60px
+  margin 0 auto
 </style>

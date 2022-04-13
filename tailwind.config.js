@@ -17,6 +17,7 @@ module.exports = {
       gray: '#999',
       black: '#000',
       divide: '#cdcdcd',
+      footer: '#e1e1e3',
       'menu-bg': '#222223',
       'menu-title': '#a1a1a3',
     },
