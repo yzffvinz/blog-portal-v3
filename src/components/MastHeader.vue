@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { getMenus } from '@/api/tag'
 import MenuIcon from './MenuIcon.vue'
 
-const router = useRouter()
 const navVisible = ref(false)
 
 const menus = ref([
@@ -24,20 +23,6 @@ function toggleUnfold() {
   navVisible.value = !navVisible.value
 }
 
-function toHome() {
-  router.push({
-    path: '/',
-  })
-  navVisible.value = false
-}
-
-function toList(category: string, tag: string) {
-  router.push({
-    path: `/list/${tag}`,
-  })
-  navVisible.value = false
-}
-
 getMenus().then((data) => {
   menus.value = data.menus
 })
@@ -47,19 +32,20 @@ defineProps<{ title: string }>()
 
 <template>
   <div
-    class="masthead-container fixed w-screen z-50"
+    class="masthead-container fixed w-full z-50"
     :class="navVisible && 'nav-visible'"
   >
     <header
       class="masthead px-5 relative z-50 flex items-center justify-center max-w-screen-xl h-12 transition bg-white border-solid border-0 border-b border-divide sm:h-16"
     >
       <div class="masthead__content">
-        <div
+        <RouterLink
           class="masthead__logo-container relative cursor-pointer text-xl sm:text-3xl"
-          @click.stop="toHome"
+          to="/"
+          @click.stop="navVisible = false"
         >
           <span class="masthead__logo"> {{ title }} </span>
-        </div>
+        </RouterLink>
       </div>
       <MenuIcon :unfold="navVisible" @menu-click="toggleUnfold"></MenuIcon>
     </header>
@@ -86,12 +72,13 @@ defineProps<{ title: string }>()
                 :key="menu.name + '_' + child.name + '_' + subIndex"
                 class="nav__subnav-item"
               >
-                <div
+                <RouterLink
                   class="nav__subnav-link text-white text-lg sm:text-2xl cursor-pointer"
-                  @click.stop="toList(menu.name, child.name)"
+                  :to="`/list/${child.name}`"
+                  @click.stop="navVisible = false"
                 >
                   {{ child.displayName }}
-                </div>
+                </RouterLink>
               </li>
             </ul>
           </li>

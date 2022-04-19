@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import FloatElf from '@/components/FloatElf.vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
@@ -9,8 +9,6 @@ import useMainStore from '@/store'
 
 const { params } = useRoute()
 const { id } = params as { id: string }
-
-const router = useRouter()
 
 const store = useMainStore()
 
@@ -27,10 +25,6 @@ const blogDetail = ref({
   content: '',
 })
 
-function toEdit() {
-  router.push(`/edit/${id}`)
-}
-
 getBlogDetail({ _id: id }).then(({ blog }) => {
   blogDetail.value = blog
 })
@@ -40,7 +34,9 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
   <article
     class="post__container max-w-screen-xl mx-auto my-0 pt-20 px-5 sm:pt-32"
   >
-    <FloatElf v-if="store.isLogin" @elf-click="toEdit">M</FloatElf>
+    <RouterLink v-if="store.isLogin" :to="`/edit/${blogDetail._id}`">
+      <FloatElf>M</FloatElf>
+    </RouterLink>
     <!-- header -->
     <header
       class="post__header pb-12 lg:mb-16 lg:border-solid lg:border-0 lg:border-b lg:border-divide"

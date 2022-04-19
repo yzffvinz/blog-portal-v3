@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive, toRefs, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import VlFlexCard from '@components/VlFlexCard.vue'
 import VPagination from '@/components/VPagination.vue'
 import FloatElf from '@/components/FloatElf.vue'
@@ -51,20 +51,20 @@ function setPageNum(pnum: number) {
   window.scrollTo(0, 0)
 }
 
-// 新增
-const router = useRouter()
-
-function toAdd() {
-  const { category, tag } = params
-  const qs = obj2querystring({ category, tag })
-  router.push(`/add?${qs}`)
-}
 const { intro, blogs, pnum, total } = toRefs(state)
 </script>
 
 <template>
   <div class="listing pt-12 sm:pt-24 sm:px-5">
-    <FloatElf v-if="store.isLogin" @elf-click="toAdd">A</FloatElf>
+    <RouterLink
+      v-if="store.isLogin"
+      :to="`/add?${obj2querystring({
+        category: params.category,
+        tag: params.tag,
+      })}`"
+    >
+      <FloatElf>A</FloatElf>
+    </RouterLink>
     <div
       v-if="intro.name"
       class="listing__tilte mx-auto mt-8 mb-10 max-w-3xl text-4xl text-center sm:mb-14"

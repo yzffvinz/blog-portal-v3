@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import TagTip from '@/components/TagTip.vue'
 
 defineProps<{
@@ -16,8 +16,6 @@ defineProps<{
     content: string
   }
 }>()
-
-const router = useRouter()
 
 function formatDate(timestamp: number) {
   const months = [
@@ -40,32 +38,19 @@ function formatDate(timestamp: number) {
   const d = date.getDate()
   return `${d} ${m}月 ${y}`
 }
-
-function onCardClick(articleId: string) {
-  router.push({
-    path: `/detail/${articleId}`,
-  })
-}
-
-function ontTagClick(tag: string) {
-  router.push({
-    path: `/list/${tag}`,
-  })
-}
 </script>
 
 <template>
   <div class="article article--vertical">
     <div class="article__image-container">
-      <div
-        class="article__image-wrap cursor-pointer"
-        @click.stop="onCardClick(blogDetail._id)"
-      >
-        <img
-          v-if="blogDetail.cover"
-          class="article__image min-w-full"
-          :src="blogDetail.cover"
-        />
+      <div class="article__image-wrap cursor-pointer">
+        <RouterLink :to="`/detail/${blogDetail._id}`">
+          <img
+            v-if="blogDetail.cover"
+            class="article__image min-w-full"
+            :src="blogDetail.cover"
+          />
+        </RouterLink>
       </div>
     </div>
     <section class="msm:px-5">
@@ -78,23 +63,22 @@ function ontTagClick(tag: string) {
           :key="'tag_' + tag + index"
           :name="tag"
           :display-name="tag"
-          @tag-click="ontTagClick(tag)"
         >
         </TagTip>
       </ul>
       <div class="article__content mt-4">
-        <div
-          class="article__title_s text-xl cursor-pointer"
-          @click.stop="onCardClick(blogDetail._id)"
-        >
-          {{ blogDetail.title }}
-        </div>
+        <RouterLink :to="`/detail/${blogDetail._id}`">
+          <div class="article__title_s text-xl cursor-pointer">
+            {{ blogDetail.title }}
+          </div>
+        </RouterLink>
         <div
           v-if="blogDetail.createtime"
           class="article__date cursor-pointer text-sm mt-4 text-gray"
-          @click.stop="onCardClick(blogDetail._id)"
         >
-          {{ formatDate(blogDetail.createtime) }}
+          <RouterLink :to="`/detail/${blogDetail._id}`">
+            {{ formatDate(blogDetail.createtime) }}
+          </RouterLink>
         </div>
       </div>
     </section>
