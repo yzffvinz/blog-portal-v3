@@ -4,28 +4,32 @@ import BasicFooter from '@/components/BasicFooter.vue'
 </script>
 
 <template>
-  <div class="content__center">
-    <MastHeader title="B👀 Ming✨" />
-    <router-view v-slot="{ Component }">
-      <transition>
-        <div>
-          <keep-alive>
+  <div
+    class="basic__container min-h-screen flex flex-col items-center justify-between"
+  >
+    <div class="content__center w-full">
+      <MastHeader title="B👀 Ming✨" />
+      <router-view v-slot="{ Component }">
+        <transition>
+          <div>
+            <keep-alive>
+              <component
+                :is="Component"
+                v-if="$route.meta.keepAlive"
+                :key="$route.fullPath"
+              />
+            </keep-alive>
             <component
               :is="Component"
-              v-if="$route.meta.keepAlive"
+              v-if="!$route.meta.keepAlive"
               :key="$route.fullPath"
             />
-          </keep-alive>
-          <component
-            :is="Component"
-            v-if="!$route.meta.keepAlive"
-            :key="$route.fullPath"
-          />
-        </div>
-      </transition>
-    </router-view>
+          </div>
+        </transition>
+      </router-view>
+    </div>
+    <BasicFooter />
   </div>
-  <BasicFooter />
 </template>
 
 <style lang="stylus">
