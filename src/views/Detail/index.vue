@@ -33,7 +33,7 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
 
 <template>
   <article
-    class="post__container max-w-screen-xl mx-auto my-0 pt-16 px-5 sm:pt-24"
+    class="post__container max-w-screen-xl mx-auto my-0 pt-20 px-5 sm:pt-24"
   >
     <RouterLink v-if="userStatus.isLogin" :to="`/edit/${blogDetail._id}`">
       <FloatElf>M</FloatElf>
