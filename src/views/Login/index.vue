@@ -7,7 +7,7 @@ import 'element-plus/es/components/input/style/css'
 import md5 from 'js-md5'
 import { userLogin } from '@/api/user'
 import { useRouter } from 'vue-router'
-import useMainStore from '@/store'
+import useUserStore from '@/store/user'
 
 const user = ref({
   username: '',
@@ -27,7 +27,7 @@ function login() {
   })
 }
 
-if (useMainStore().isLogin) {
+if (useUserStore().isLogin) {
   toHome()
 }
 </script>

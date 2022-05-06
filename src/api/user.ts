@@ -1,5 +1,5 @@
 import fetchApi from '@/libs/fetchApi'
-import useMainStore from '@/store'
+import useUserStore from '@/store/user'
 
 interface LoginParams {
   username: string
@@ -8,14 +8,14 @@ interface LoginParams {
 
 export function syncUserStatus() {
   return fetchApi.get('/api/user/status').then(({ isLogin, userInfo }) => {
-    useMainStore().setUserLogin(isLogin)
-    useMainStore().setUserInfo(userInfo)
+    useUserStore().setUserLogin(isLogin)
+    useUserStore().setUserInfo(userInfo)
   })
 }
 
 export function userLogin(params: LoginParams) {
   return fetchApi.post('/api/user/login', params).then((data) => {
-    useMainStore().setUserLogin(true)
+    useUserStore().setUserLogin(true)
     syncUserStatus()
   })
 }

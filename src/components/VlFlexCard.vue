@@ -62,7 +62,6 @@ function formatDate(timestamp: number) {
           v-for="(tag, index) in blogDetail.tags"
           :key="'tag_' + tag + index"
           :name="tag"
-          :display-name="tag"
         >
         </TagTip>
       </ul>

@@ -10,7 +10,7 @@ interface UserInfo {
   username: string
 }
 
-const useMainStore = defineStore('main', {
+const useUserStore = defineStore('user', {
   state: () => {
     return {
       user: {
@@ -28,11 +28,11 @@ const useMainStore = defineStore('main', {
     }
   },
   getters: {
-    isLogin(): boolean {
-      return this.user.login
+    isLogin(state): boolean {
+      return state.user.login
     },
-    userInfo(): UserInfo {
-      return this.user.userInfo
+    userInfo(state): UserInfo {
+      return state.user.userInfo
     },
   },
   actions: {
@@ -45,4 +45,4 @@ const useMainStore = defineStore('main', {
   },
 })
 
-export default useMainStore
+export default useUserStore

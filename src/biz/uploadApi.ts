@@ -1,8 +1,8 @@
 import COS from 'cos-js-sdk-v5'
 import { getDateStr } from '@/libs/date'
-import useMainStore from '@/store'
+import useUserStore from '@/store/user'
 
-const { userInfo } = useMainStore() // 用户信息
+const { userInfo } = useUserStore() // 用户信息
 
 let cos: COS | null = null // 单例的 COS 实例
 function getCos(): COS {

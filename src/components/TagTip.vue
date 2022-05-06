@@ -1,25 +1,22 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import useDictStore from '@/store/dict'
 
 const props = defineProps({
   name: {
     type: String,
-    default: undefined,
-  },
-  displayName: {
-    type: String,
-    default: 'unknown',
-  },
-  color: {
-    type: String,
-    default: '#ffc832',
+    default: '',
   },
 })
 
-const emit = defineEmits(['tagClick'])
+const dict = useDictStore()
+const tagInfo = computed(() => {
+  return dict.getTagInfo(props.name)
+})
 
 const styleLine = `
-  --unline-color: ${props.color};
+  --unline-color: ${tagInfo.value?.color || '#ffc832'};
   --tw-contents: '';
 `
 </script>
@@ -31,7 +28,7 @@ const styleLine = `
     <a
       class="inline-block relative z-0 pb-1 text-black no-underline mr-4 after:absolute after:left-0 after:bottom-0.5 after:h-0.5 after:w-full after:bg-black after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-0"
       :style="styleLine"
-      >{{ displayName }}
+      >{{ tagInfo?.displayName || name }}
     </a>
   </RouterLink>
 </template>

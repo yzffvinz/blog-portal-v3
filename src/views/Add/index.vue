@@ -19,7 +19,8 @@ import 'element-plus/es/components/switch/style/css'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { useRoute, useRouter } from 'vue-router'
-import { getCategories, getTags } from '@/api/tag'
+import useDictStore from '@/store/dict'
+import { getCategories } from '@/api/tag'
 import { addBlog, getBlogDetail, modBlog } from '@/api/blog'
 import upload from '@/biz/uploadApi'
 
@@ -38,12 +39,7 @@ const categories = ref([
   },
 ])
 
-const tags = ref([
-  {
-    name: '',
-    displayName: '',
-  },
-])
+const { tags } = useDictStore()
 
 const blogDetail = ref({
   title: '',
@@ -57,10 +53,6 @@ const blogDetail = ref({
 
 getCategories().then((data) => {
   categories.value = data.categories
-})
-
-getTags().then((data) => {
-  tags.value = data.tags
 })
 
 const { params, query } = useRoute()
@@ -140,8 +132,8 @@ const rules = reactive({
       <ElFormItem label="标签">
         <ElSelect v-model="blogDetail.tags" multiple filterable>
           <ElOption
-            v-for="(tag, ti) in tags"
-            :key="'category_' + ti"
+            v-for="tag in tags"
+            :key="'tag_' + tag.name"
             :value="tag.name"
             :label="tag.displayName"
           >

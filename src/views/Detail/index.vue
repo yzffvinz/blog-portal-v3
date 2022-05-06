@@ -5,12 +5,12 @@ import FloatElf from '@/components/FloatElf.vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { getBlogDetail } from '@/api/blog'
-import useMainStore from '@/store'
+import useUserStore from '@/store/user'
 
 const { params } = useRoute()
 const { id } = params as { id: string }
 
-const store = useMainStore()
+const store = useUserStore()
 
 const blogDetail = ref({
   _id: '',

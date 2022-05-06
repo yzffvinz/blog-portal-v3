@@ -5,13 +5,13 @@ import VlFlexCard from '@components/VlFlexCard.vue'
 import VPagination from '@/components/VPagination.vue'
 import FloatElf from '@/components/FloatElf.vue'
 import { getBlogList } from '@/api/blog'
-import useMainStore from '@/store'
+import useUserStore from '@/store/user'
 import { obj2querystring } from '@/libs/url'
 import { BlogDetail, TagDetail } from '@/types/types'
 
 const psize = 18
 
-const store = useMainStore()
+const store = useUserStore()
 
 const state = reactive({
   intro: {} as TagDetail,

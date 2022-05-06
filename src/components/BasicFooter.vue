@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-footer mt-14 py-8 w-screen">
+  <div class="bg-footer mt-14 py-8 w-full">
     <div class="footer__accreditations mx-auto px-5 flex flex-col items-center">
       <p>Vincent Home</p>
       <a href="https://beian.miit.gov.cn/" target="_blank">
