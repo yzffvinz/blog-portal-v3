@@ -22,7 +22,7 @@ const styleLine = `
 </script>
 <template>
   <RouterLink
-    class="article__category cursor-pointer inline-block font-bold text-xs text-black whitespace-nowrap uppercase"
+    class="article__category cursor-pointer inline-block font-bold leading-6 text-xs text-black whitespace-nowrap uppercase"
     :to="`/list/${name}`"
   >
     <a

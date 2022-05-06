@@ -11,7 +11,7 @@ import { BlogDetail, TagDetail } from '@/types/types'
 
 const psize = 18
 
-const store = useUserStore()
+const { userStatus } = useUserStore()
 
 const state = reactive({
   intro: {} as TagDetail,
@@ -57,7 +57,7 @@ const { intro, blogs, pnum, total } = toRefs(state)
 <template>
   <div class="listing pt-12 sm:pt-24 sm:px-5">
     <RouterLink
-      v-if="store.isLogin"
+      v-if="userStatus.isLogin"
       :to="`/add?${obj2querystring({
         category: params.category,
         tag: params.tag,

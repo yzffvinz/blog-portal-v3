@@ -4,8 +4,6 @@ import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus'
 import 'element-plus/es/components/form/style/css'
 import 'element-plus/es/components/form-item/style/css'
 import 'element-plus/es/components/input/style/css'
-import md5 from 'js-md5'
-import { userLogin } from '@/api/user'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/store/user'
 
@@ -15,19 +13,17 @@ const user = ref({
 })
 
 const router = useRouter()
+const { userStatus, login } = useUserStore()
 
 function toHome() {
   router.push('/')
 }
 
-function login() {
-  const password = md5(user.value.password)
-  userLogin({ username: user.value.username, password }).then(() => {
-    toHome()
-  })
+function submit() {
+  login(user.value.username, user.value.password).then(toHome)
 }
 
-if (useUserStore().isLogin) {
+if (userStatus.isLogin) {
   toHome()
 }
 </script>
@@ -46,7 +42,7 @@ if (useUserStore().isLogin) {
         ></ElInput>
       </ElFormItem>
       <ElFormItem>
-        <ElButton type="primary" @click="login()">提交</ElButton>
+        <ElButton type="primary" @click="submit()">提交</ElButton>
       </ElFormItem>
     </ElForm>
   </div>

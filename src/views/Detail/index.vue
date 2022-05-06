@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import FloatElf from '@/components/FloatElf.vue'
+import TagTip from '@/components/TagTip.vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { getBlogDetail } from '@/api/blog'
@@ -10,7 +11,7 @@ import useUserStore from '@/store/user'
 const { params } = useRoute()
 const { id } = params as { id: string }
 
-const store = useUserStore()
+const { userStatus } = useUserStore()
 
 const blogDetail = ref({
   _id: '',
@@ -34,7 +35,7 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
   <article
     class="post__container max-w-screen-xl mx-auto my-0 pt-20 px-5 sm:pt-32"
   >
-    <RouterLink v-if="store.isLogin" :to="`/edit/${blogDetail._id}`">
+    <RouterLink v-if="userStatus.isLogin" :to="`/edit/${blogDetail._id}`">
       <FloatElf>M</FloatElf>
     </RouterLink>
     <!-- header -->
@@ -47,6 +48,17 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
         <h1>
           {{ blogDetail.title }}
         </h1>
+        <ul
+          v-if="blogDetail.tags && blogDetail.tags.length"
+          class="article__categories mt-4"
+        >
+          <TagTip
+            v-for="(tag, index) in blogDetail.tags"
+            :key="'tag_' + tag + index"
+            :name="tag"
+          >
+          </TagTip>
+        </ul>
       </div>
     </header>
     <!-- contents -->
