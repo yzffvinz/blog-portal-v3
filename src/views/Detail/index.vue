@@ -33,7 +33,7 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
 
 <template>
   <article
-    class="post__container max-w-screen-xl mx-auto my-0 pt-20 px-5 sm:pt-32"
+    class="post__container max-w-screen-xl mx-auto my-0 pt-16 px-5 sm:pt-24"
   >
     <RouterLink v-if="userStatus.isLogin" :to="`/edit/${blogDetail._id}`">
       <FloatElf>M</FloatElf>
@@ -42,16 +42,8 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
     <header
       class="post__header pb-12 lg:mb-16 lg:border-solid lg:border-0 lg:border-b lg:border-divide"
     >
-      <div
-        class="post__title px-auto py-0 mx-auto w-3/4 max-w-3xl text-center break-normal text-2xl sm:text-4xl lg:text-5xl"
-      >
-        <h1>
-          {{ blogDetail.title }}
-        </h1>
-        <ul
-          v-if="blogDetail.tags && blogDetail.tags.length"
-          class="article__categories mt-4"
-        >
+      <div class="post__title px-auto py-0 mx-auto w-3/4 max-w-3xl text-center">
+        <ul v-if="blogDetail.tags && blogDetail.tags.length" class="pb-10">
           <TagTip
             v-for="(tag, index) in blogDetail.tags"
             :key="'tag_' + tag + index"
@@ -59,6 +51,9 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
           >
           </TagTip>
         </ul>
+        <h1 class="break-normal text-2xl sm:text-4xl lg:text-5xl">
+          {{ blogDetail.title }}
+        </h1>
       </div>
     </header>
     <!-- contents -->
