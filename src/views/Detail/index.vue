@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import FloatElf from '@/components/FloatElf.vue'
 import TagTip from '@/components/TagTip.vue'
+import VFlexIntro from '@/components/VFlexIntro.vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { getBlogDetail } from '@/api/blog'
@@ -59,7 +60,8 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
     <!-- contents -->
     <div class="article__columns">
       <div class="article__column--main">
-        <div class="article__body">
+        <VFlexIntro :blog-intro="blogDetail"></VFlexIntro>
+        <div class="post__content">
           <MdEditor
             :model-value="blogDetail.content"
             preview-theme="github"

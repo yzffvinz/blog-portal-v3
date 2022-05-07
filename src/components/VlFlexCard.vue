@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import { formatDateCN } from '@/libs/utils'
 import TagTip from '@/components/TagTip.vue'
 
 defineProps<{
@@ -16,28 +17,6 @@ defineProps<{
     content: string
   }
 }>()
-
-function formatDate(timestamp: number) {
-  const months = [
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-    '七',
-    '八',
-    '九',
-    '十',
-    '十一',
-    '十二',
-  ]
-  const date = new Date(timestamp)
-  const y = date.getFullYear()
-  const m = months[date.getMonth()]
-  const d = date.getDate()
-  return `${d} ${m}月 ${y}`
-}
 </script>
 
 <template>
@@ -76,7 +55,7 @@ function formatDate(timestamp: number) {
           class="article__date cursor-pointer text-sm mt-4 text-gray"
         >
           <RouterLink :to="`/detail/${blogDetail._id}`">
-            {{ formatDate(blogDetail.createtime) }}
+            {{ formatDateCN(blogDetail.createtime) }}
           </RouterLink>
         </div>
       </div>
