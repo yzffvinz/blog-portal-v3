@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 import { doShowLog } from '@/api/stat'
 
 doShowLog('site')
