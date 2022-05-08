@@ -1,7 +1,8 @@
 import { obj2querystring } from '../url'
 
 export function apiGet(url: string, params?: any) {
-  return fetch(`${url}?${obj2querystring(params)}`)
+  const urlWithParams = params ? `${url}?${obj2querystring(params)}` : url
+  return fetch(urlWithParams)
     .then((res) => res.json())
     .then(({ status, msg, data }) => {
       if (status) {

@@ -9,7 +9,7 @@ defineProps<{
     author: string
     createtime: number
     updatetime: number
-    // viewcount: number
+    pv: number
   }
 }>()
 </script>
@@ -28,6 +28,7 @@ defineProps<{
       <p>
         作者: <span class="text-black">{{ blogIntro.author }}</span
         >，约{{ blogIntro.content.replace(/(#|\n|)/g, '').length }}字
+        <span v-if="blogIntro.pv">，{{ blogIntro.pv }}人浏览过</span>
       </p>
       <p>创建于：{{ formatDatetime(blogIntro.createtime) }}</p>
       <p>更新于：{{ formatDatetime(blogIntro.updatetime) }}</p>

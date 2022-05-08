@@ -8,9 +8,12 @@ import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 import { getBlogDetail } from '@/api/blog'
 import useUserStore from '@/store/user'
+import { doShowLog, getBlogPV } from '@/api/stat'
 
 const { params } = useRoute()
 const { id } = params as { id: string }
+
+doShowLog('detail', { id })
 
 const { userStatus } = useUserStore()
 
@@ -27,8 +30,14 @@ const blogDetail = ref({
   content: '',
 })
 
+const blogPV = ref(0)
+
 getBlogDetail({ _id: id }).then(({ blog }) => {
   blogDetail.value = blog
+})
+
+getBlogPV(id).then(({ count }) => {
+  blogPV.value = count
 })
 </script>
 
@@ -60,7 +69,7 @@ getBlogDetail({ _id: id }).then(({ blog }) => {
     <!-- contents -->
     <div class="article__columns">
       <div class="article__column--main">
-        <VFlexIntro :blog-intro="blogDetail"></VFlexIntro>
+        <VFlexIntro :blog-intro="{ ...blogDetail, pv: blogPV }"></VFlexIntro>
         <div class="post__content">
           <MdEditor
             :model-value="blogDetail.content"

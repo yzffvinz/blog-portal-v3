@@ -8,6 +8,7 @@ import { getBlogList } from '@/api/blog'
 import useUserStore from '@/store/user'
 import { obj2querystring } from '@/libs/url'
 import { BlogDetail, TagDetail } from '@/types/types'
+import { doShowLog } from '@/api/stat'
 
 const psize = 18
 
@@ -21,6 +22,8 @@ const state = reactive({
 })
 
 const { params } = useRoute()
+
+doShowLog('list', { tag: params.tag })
 
 function queryBlogs(pnum: number) {
   getBlogList({
