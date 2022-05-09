@@ -1,5 +1,6 @@
 export interface TagDetail {
   name: string
+  cover: string
   displayName: string
   description: string
 }

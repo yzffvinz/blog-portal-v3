@@ -68,6 +68,7 @@ const { intro, blogs, pnum, total } = toRefs(state)
     >
       <FloatElf>A</FloatElf>
     </RouterLink>
+    <img v-if="state.intro.cover" :src="state.intro.cover" class="w-full" />
     <div
       v-if="intro.name"
       class="listing__tilte mx-auto mt-8 mb-10 max-w-3xl text-4xl text-center sm:mb-14"
