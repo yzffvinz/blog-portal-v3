@@ -33,7 +33,14 @@ export function formatDatetime(timestamp: number) {
   return `${y}-${m}-${d} ${h}:${min}:${s}`
 }
 
+export function estimateMarkdownWords(content: string) {
+  if (!content) return 0
+  const replaceReg = /(#|\s+|<.*?>|!{0,1}\[.*?\]\(.*?\))/g
+  return content.replace(replaceReg, '').length
+}
+
 export default {
   formatDateCN,
   formatDatetime,
+  estimateMarkdownWords,
 }

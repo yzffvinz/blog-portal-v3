@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatDatetime } from '@/libs/utils'
+import { formatDatetime, estimateMarkdownWords } from '@/libs/utils'
 
 defineProps<{
   blogIntro: {
@@ -27,7 +27,7 @@ defineProps<{
     >
       <p>
         作者: <span class="text-black">{{ blogIntro.author }}</span
-        >，约{{ blogIntro.content.replace(/(#|\n|)/g, '').length }}字
+        >，约{{ estimateMarkdownWords(blogIntro.content) }}字
         <span v-if="blogIntro.pv">，{{ blogIntro.pv }}人浏览过</span>
       </p>
       <p>创建于：{{ formatDatetime(blogIntro.createtime) }}</p>
