@@ -49,6 +49,14 @@ const router = createRouter({
           },
         },
         {
+          // emoadd,
+          path: '/emoadder',
+          component: () => import('@/views/EmoAdder/index.vue'),
+          meta: {
+            title: '暂存心情',
+          },
+        },
+        {
           path: '/login',
           component: () => import('@/views/Login/index.vue'),
         },

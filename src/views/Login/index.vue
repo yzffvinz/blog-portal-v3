@@ -4,6 +4,7 @@ import { ElForm, ElFormItem, ElInput, ElButton } from 'element-plus'
 import 'element-plus/es/components/form/style/css'
 import 'element-plus/es/components/form-item/style/css'
 import 'element-plus/es/components/input/style/css'
+import 'element-plus/es/components/button/style/css'
 import { useRouter } from 'vue-router'
 import useUserStore from '@/store/user'
 

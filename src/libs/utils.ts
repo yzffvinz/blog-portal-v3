@@ -20,7 +20,7 @@ export function formatDateCN(timestamp: number) {
   return `${d} ${m}月 ${y}`
 }
 
-export function formatDatetime(timestamp: number) {
+export function formatDatetime(timestamp: number, needPad = true) {
   const date = new Date(timestamp)
   const [y, m, d, h, min, s] = [
     date.getFullYear(),
@@ -29,8 +29,10 @@ export function formatDatetime(timestamp: number) {
     date.getHours(),
     date.getMinutes(),
     date.getSeconds(),
-  ].map((item) => item.toString().padStart(2, '0'))
-  return `${y}-${m}-${d} ${h}:${min}:${s}`
+  ].map((item) =>
+    needPad ? item.toString().padStart(2, '0') : item.toString()
+  )
+  return `${y}-${m}-${d} ${h}:${min}`
 }
 
 export function estimateMarkdownWords(content: string) {

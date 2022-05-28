@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 import { getMenus } from '@/api/tag'
+import CountButton from '@/components/CountButton.vue'
 import MenuIcon from './MenuIcon.vue'
 
+const router = useRouter()
 const navVisible = ref(false)
 
 const menus = ref([
@@ -21,6 +23,14 @@ const menus = ref([
 
 function toggleUnfold() {
   navVisible.value = !navVisible.value
+}
+
+function processLogin() {
+  router.push('/login')
+}
+
+function addEmo() {
+  router.push('/emoadder')
 }
 
 getMenus().then((data) => {
@@ -46,6 +56,11 @@ defineProps<{ title: string }>()
         >
           <span class="masthead__logo"> {{ title }} </span>
         </RouterLink>
+      </div>
+      <div class="absolute left-5">
+        <CountButton @twice-click="processLogin" @triple-click="addEmo">
+          <div class="w-5 h-5 border-solid border-black border-y-2 bold">-</div>
+        </CountButton>
       </div>
       <MenuIcon :unfold="navVisible" @menu-click="toggleUnfold"></MenuIcon>
     </header>
