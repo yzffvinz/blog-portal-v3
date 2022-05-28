@@ -14,19 +14,16 @@ const props = defineProps({
   },
 })
 
-const MultipleClickEvents = {
-  2: 'twice-click',
-  3: 'triple-click',
-}
-
-let timer = null
+let timer: any = null
 let count = 0
 
 function handleClick() {
   if (!timer && !count) {
     timer = setTimeout(() => {
-      if (MultipleClickEvents[count]) {
-        emits(MultipleClickEvents[count])
+      if (count === 2) {
+        emits('twice-click')
+      } else if (count === 3) {
+        emits('triple-click')
       }
 
       count = 0

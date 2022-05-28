@@ -12,7 +12,15 @@ const router = useRouter()
 const EMO_BLOGID = '620215c6cf6a2a5c64636ea3'
 const datetime = formatDatetime(Date.now())
 const emo = ref('')
-const blogDetail = ref({})
+const blogDetail = ref({
+  title: '',
+  cover: '',
+  description: '',
+  category: '',
+  tags: [] as string[],
+  content: '',
+  hide: 0,
+})
 
 getBlogDetail({ _id: EMO_BLOGID }).then(({ blog }) => {
   blogDetail.value = blog
