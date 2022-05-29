@@ -2,7 +2,7 @@ import { obj2querystring } from '../url'
 
 export function apiGet(url: string, params?: any) {
   const urlWithParams = params ? `${url}?${obj2querystring(params)}` : url
-  return fetch(import.meta.env.VITE_API_HOST + urlWithParams)
+  return fetch(urlWithParams)
     .then((res) => res.json())
     .then(({ status, msg, data }) => {
       if (status) {
@@ -13,7 +13,7 @@ export function apiGet(url: string, params?: any) {
 }
 
 export function apiPost(url: string, params?: any) {
-  return fetch(import.meta.env.VITE_API_HOST + url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
