@@ -2,8 +2,9 @@
   "name": "blog-portal-v3",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vue-tsc --noEmit && vite build",
+    "start": "vite --host",
+    "dev": "vite --host --mode=dev",
+    "build": "vue-tsc --noEmit --mode=prod && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
